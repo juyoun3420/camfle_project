@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>마이페이지</title>
+    <style>
+        .container {
+            width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FBC9E4;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 20px;
+        }
+        
+        #username {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        #starDonation {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        #submitButton {
+            text-align: center;
+        }
+
+        .delete-button {
+            background-color: transparent;
+            color: gray;
+            border: none;
+            padding: 5px 10px;
+        }
+
+        #keywordList {
+            list-style-type: none;
+        }
+
+        #keywordList li::before {
+            content: "\2605";
+            font-size: 24px;
+            color: #F44D99;
+            margin-right: 5px;
+        }
+
+        #other-section .box {
+            margin-top: 45px;
+            width: 200px;
+            height: 120px;
+            border: 2px solid #000;
+            border-radius: 20px;
+        }
+
+        #statistics .box {
+            margin-top: 30px;
+            margin-left: -95px;
+            width: 350px;
+            border: 2px solid white;
+            height: 220px;
+        }
+        #rank {
+            text-align: right;
+            font-size: 18px; 
+            font-weight: bold;
+        }
+
+       .footer-content {
+           font-size: 12px;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+           padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="profile">
+            <div class="box" style="width: 300px; height: 200px;">
+                <img class="profile-image" id="user-profile-image" src="./프로필.png" alt="프로필 이미지">
+                <h1 id="username" style="display: inline">Kitty</h1>
+                <p id="starDonation">총 <span style="color: #F44D99;">63000 스타</span> 기부달성</p>
+                <div id="rank"><p>Rank: </p></div>
+            </div>
+        </section>
+
+        <section id="settings" style="width: 250px; height: 200px; margin-left: 20px;">
+            <div class="box" >
+                <form id="keywordForm">
+                    <label for="keyword" style="font-size: 18px;">키워드 알림설정</label><br>
+                    <input type="text" id="keyword" name="keyword">
+                    <button type="submit" id="submitButton">+</button>
+                </form>
+                <div id="result">
+                    <ul id="keywordList" class="keyword-list">
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="other-section">
+            <div class="box">
+              <h2 style="font-size: 15px;">나의 스타</h2>
+              <p><strong><span id="current" style="font-size: 30px;">0</span></strong></p>
+              <h2 style="font-size: 15px; text-align: right;">스타</h2>
+            </div>
+        </section>
+
+        <section id="statistics">
+            <div class="box">
+                <h2>통계 그래프</h2>
+            </div>
+        </section>
+        <div class="footer">
+         <div>
+          <div class="footer-content">
+            Giboo&Take<br />Copyrightⓒ 2023 by 오소몰 all rights reserved
+          </div>
+          <!--인스타그램 깃허브 아이콘 연결-->
+          </div>
+        </div>
+    </div>
+    <script src="./mypage.js"></script>
+</body>
+</html>
