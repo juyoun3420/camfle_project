@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>충전페이지</title>
+    <link rel="stylesheet" href="../static/takePage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Source+Serif+4:opsz@8..60&display=swap"
+          rel="stylesheet" />
+    <style>
+        .navbar {
+            width: 97%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .title {
+            text-decoration: none;
+            color: black;
+            font-size: 35px;
+            font-family: "Irish Grover";
+        }
+
+        ul {
+            width: 15vw;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        li,
+        .login {
+            text-decoration-line: none;
+            color: black;
+            font-size: 20px;
+            font-family: "Source Serif 4";
+        }
+
+        .login {
+            width: 15vw;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container {
+            width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FBC9E4;
+        }
+
+        .box {
+            width: 400px;
+            height: 160px;
+            border: 2px solid #FBC9E4;
+            background-color: white;
+            padding: 20px;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        .stickBar {
+            width: 440px;
+            height: 25px;
+            position: relative;
+            bottom: 3.5px;
+        }
+
+        .buttonWrapper {
+            display: flex;
+            position: relative;
+        }
+
+        .buttonWrapper .Glitter {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 6px;
+            left: 108px;
+        }
+
+        #userName {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .balance {
+            color: #F44D99;
+            text-decoration: underline dashed black;
+            margin-top: -18px;
+        }
+
+        #chargeBox {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #chargeAmount {
+            width: 150px;
+            height: 25px;
+            font-size: 20px;
+            background-color: rgba(255,255,255,0.9);
+            padding: 10px;
+            border: 1.7px solid black;
+            border-radius: 8px;
+        }
+
+        #resetBtn {
+            width: 60px;
+            height: 30px;
+            background-color: #D9D9D9;
+            border-radius: 8px;
+            border: 1px solid #000;
+        }
+
+        #chargeButtons {
+            display: grid;
+            grid-template-columns: repeat(2, 150px);
+            grid-template-rows: repeat(3, auto);
+            gap: 10px;
+        }
+
+        #btn1, #btn2, #btn3, #btn4, #btn5, #btn6 {
+            width: 140px;
+            height: 43px;
+            background-color: #f77db5;
+            position: relative;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 27px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        }
+
+        #starBtn {
+            background-image: url('img_charge/star_btn.png');
+            width: 140px;
+            height: 150px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #ff53a5;
+            height: 15vh;
+        }
+
+        .footer-content {
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; flex-direction: row; align-items: center">
+            <a href="" class="title">Giboo & Take</a>
+            <ul class="navbar_menu">
+                <li>Giboo</li>
+                <li>Take</li>
+                <li>Charge</li>
+            </ul>
+        </div>
+        <div class="login">
+            <div>login</div>
+            <div>|</div>
+            <div>sign up</div>
+            <img src="../static/icons/profile_img.png"
+                 alt="profile"
+                 style="width: 50px" />
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="box">
+            <img class="stickBbar" src="img_charge/stick.png" alt="스틱바 이미지">
+            <p style="margin-bottom: 35px;"><span id="userName">Kitty</span> 님의 현재 잔액:</p>
+            <p class="balance">
+                <span id="current">충전된 잔액</span> 스타
+                <img style="width: 25px; height: 25px; margin-bottom: 15px;" src="img_charge/glitter.png" alt="글리터 이미지">
+            </p>
+            <img class="stickBar" style="bottom: -4px;" src="img_charge/stick.png" alt="스틱바 이미지">
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <p style="font-size: 20px; margin-right: 18px;">충전 금액:</p>
+            <span id="chargeAmount" style="font-size: 20px; margin-right: 10px;">0</span>
+            <input type="reset" id="resetBtn" value="초기화">
+        </div>
+        <div id="chargeBox">
+            <div id="chargeButtons">
+                <div class="buttonWrapper">
+                    <input type="button" id="btn1" value="1,000">
+                    <img class="Glitter" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+                <div class="buttonWrapper">
+                    <input type="button" id="btn2" value="2,000">
+                    <img class="Glitter" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+                <div class="buttonWrapper">
+                    <input type="button" id="btn3" value="5,000">
+                    <img class="Glitter" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+                <div class="buttonWrapper">
+                    <input type="button" id="btn4" value="10,000">
+                    <img class="Glitter" style="left: 113px;" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+                <div class="buttonWrapper">
+                    <input type="button" id="btn5" value="20,000">
+                    <img class="Glitter" style="left: 113px;" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+                <div class="buttonWrapper">
+                    <input type="button" id="btn6" value="30,000">
+                    <img class="Glitter" style="left: 113px;" src="img_charge/glitter0.png" alt="글리터 이미지">
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <h3 style="margin-top: -30px;">충전 하겠습니까?</h3>
+                <img style="width: 120px; height:80px; margin: 20px;" src="img_charge/arrow.png" alt="화살표 이미지">
+                <input type="button" id="starBtn" src="img_charge/star_btn.png" alt="버튼 이미지">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+            <div class="footer-content">
+                Giboo&Take<br />Copyrightⓒ 2023 by 오소몰 all rights reserved
+            </div>
+            <!--인스타그램 깃허브 아이콘 연결-->
+        </div>
+    </div>
+    <script src="Charge.js"></script>
+</body>
+</html>
