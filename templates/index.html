@@ -13,7 +13,11 @@
  <a href="/">Giboo & Take</a>
  </div>
  <ul class="navbar__menu">
- <li><a href="/login">login</a></li>
+     {% if session['id'] %}
+         <li><a href="/logout"><b>{{seffion[if]}}님 반갑습니다!</b>logout</a></li>
+    {% else %}
+         <li><a href="/login">login</a></li>
+     {% end if %}
  <li><a href="/list">List</a></li>
  <li><a href="/review">Review</a></li>
  <li><a href="/reg_items">Register Items</a></li>
