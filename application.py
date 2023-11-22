@@ -52,7 +52,32 @@ def register_user():
 
 @application.route("/list")
 def view_list():
-    return render_template("list.html")
+    page = request.args.get("page", 0, type=int)
+    per_page = 6
+    per_row = 3
+    row_count = int(per_page/per_row)
+    start_idx = per_page * page
+    end_idx = per_page*(page+1)
+    data = DB.get_items()
+    item_counts = len(data)
+    data = dict(list(data.items())[start_idx:end_idx])
+    tot_count = len(data)
+
+    for i in range(row_count):
+        if (i == row_count-1) and (tot_count % per_row != 0):
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+        else:
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+
+    return render_template(
+        "list.html",
+        datas=data.items(),
+        row1=locals()['data_0'].items(),
+        row2=locals()['data_1'].items(),
+        limit=per_page,
+        page=page,
+        page_count=int((item_counts/per_page)+1),
+        total=item_counts)
 
 @application.route("/review")
 def view_review():
@@ -66,6 +91,17 @@ def reg_item():
 def reg_review():
     return render_template("reg_reviews.html")
 
+@application.route('/dynamicurl/<varible_name>/')
+def DynamicUrl(varible_name):
+           return str(varible_name)
+
+@application.route("/view_detail/<name>/")
+def view_item_detail(name):
+    print("###name:",name)
+    data = DB.get_item_byname(str(name))
+    print("####data:",data)
+    return render_template("detail.html", name=name, data=data)
+    
 @application.route("/submit_item_post", methods=['POST'])
 def reg_item_submit_post():
     image_file=request.files["file"]
@@ -74,6 +110,7 @@ def reg_item_submit_post():
     DB.insert_item(data['name'], data, image_file.filename)
     
     return render_template("submit_item_result.html", data=data, img_path="static/images/{}".format(image_file.filename))
+
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)
