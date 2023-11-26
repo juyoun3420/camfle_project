@@ -87,9 +87,15 @@ def view_review():
 def reg_item():
     return render_template("reg_items.html")
 
-@application.route("/reg_reviews")
-def reg_review():
-    return render_template("reg_reviews.html")
+@application.route("/reg_review_init/<name>/")
+def reg_review_init(name):
+    return render_template("reg_reviews.html", name=name)
+
+@application.route("/reg_reviews", methods=['POST'])
+def reg_reviews():
+    data=request.form
+    DB.reg_review(data)
+    return redirect(url_for('review'))
 
 @application.route('/dynamicurl/<varible_name>/')
 def DynamicUrl(varible_name):
