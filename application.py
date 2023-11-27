@@ -120,13 +120,22 @@ def reg_review_init(name):
 @application.route("/reg_reviews", methods=['POST'])
 def reg_reviews():
     data=request.form
-    DB.reg_review(data)
+    image_file=request.files["file"]
+    image_file.save("static/images/{}".format(image_file.filename))
+    DB.reg_review(data, img_path="static/images/{}".format(image_file.filename))
     return redirect(url_for('view_review'))
 
 @application.route('/dynamicurl/<varible_name>/')
 def DynamicUrl(varible_name):
            return str(varible_name)
 
+@application.route("/view_review_detail/<name>/")
+def view_review_detail(name):
+    print("###name:", name)
+    data = DB.get_review_byname(str(name))
+    print("###data:", data)
+    return render_template("review_detail.html", name=name, data=data)
+    
 @application.route("/view_detail/<name>/")
 def view_item_detail(name):
     print("###name:",name)
