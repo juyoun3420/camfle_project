@@ -76,6 +76,7 @@ class DBhandler:
             
     def reg_review(self, data, img_path):
         review_info = {
+            "title": data['title'],
             "rate": data['reviewStar'],
             "review": data['reviewContents'],
             "img_path": img_path
