@@ -108,7 +108,6 @@ def view_review():
         page_count=int((item_counts/per_page)+1),
         total=item_counts)
 
-
 @application.route("/reg_items")
 def reg_item():
     return render_template("reg_items.html")
