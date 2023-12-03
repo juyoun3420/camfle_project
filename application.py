@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template, flash, redirect, url_for, request, session, jsonify
 from database import DBhandler
 import hashlib
 import sys
+import math
 
 application = Flask(__name__)
 application.config["SECRET_KEY"]="helloosp"
@@ -53,13 +56,23 @@ def register_user():
 @application.route("/list")
 def view_list():
     page = request.args.get("page", 0, type=int)
+    category = request.args.get("category", "all")
     per_page = 6
     per_row = 3
     row_count = int(per_page/per_row)
     start_idx = per_page * page
     end_idx = per_page*(page+1)
+    if category == "all":
+        data = DB.get_items()
+    else :
+        data = DB.get_items_bycategory(category)
     data = DB.get_items()
+    data = dict(sorted(data.items(), key=lambda x:x[0], reverse=False))
     item_counts = len(data)
+    if item_counts <= per_page:
+        data = dict(list(data.items())[:item_counts])
+    else :
+        data = dict(list(data.items())[start_idx:end_idx])
     data = dict(list(data.items())[start_idx:end_idx])
     tot_count = len(data)
 
@@ -76,8 +89,9 @@ def view_list():
         row2=locals()['data_1'].items(),
         limit=per_page,
         page=page,
-        page_count=int((item_counts/per_page)+1),
-        total=item_counts)
+        page_count=int(math.ceil(item_counts/per_page)+1),
+        total=item_counts,
+        category=category)
 
 @application.route("/reg_items")
 def reg_item():
