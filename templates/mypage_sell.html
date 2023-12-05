@@ -10,7 +10,14 @@
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
-
+    
+    #seller-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
     #content-container{
         display: flex;
         justify-content: center;
@@ -39,12 +46,14 @@
         <p>
             Seller Name: {{name}}
         </p>
-        <button onclick="location.href='/view_mypage_sell/{{name}}/;">
-            Market   
-        </button>
-        <button onclick="location.href='/view_mypage_review/{{name}}/;">
-            Review
-        </button>
+        <div id="buttons" style="display:flex;">
+            <button onclick="location.href='/view_mypage_sell/{{name}}/;">
+                Market   
+            </button>
+            <button onclick="location.href='/view_mypage_review/{{name}}/;">
+                Review
+            </button>
+        </div>
     </div>
     <hr>
     {% if total > 0 %}
@@ -57,7 +66,7 @@
             <td>
                 <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
                     <p>상품이름: {{key}}</p>
-                    <img src="./static/images/{{value.img_path}}" width=200 height=200>
+                    <img src="/static/images/{{value.img_path}}" width=200 height=200>
                 </div>
             </td>
             {% endfor %}
