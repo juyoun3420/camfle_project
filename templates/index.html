@@ -17,9 +17,10 @@
         </div>
         <ul class="navbar__menu">
             {% if session['id'] %}
-            <li><a href="/logout"><b>{{session['id']}}님 반갑습니다!</b> logout</a></li>
+            <li><a href="/mypage_sell">마이 페이지 </a></li>
+            <li><a href="/logout"><b>{{session['id']}}님 반갑습니다!</b> 로그아웃</a></li>
             {% else %}
-            <li><a href="/login">login</a></li>
+            <li><a href="/login">로그인</a></li>
             {% endif %}
         
             <li><a href="/list">제품 피드</a></li>

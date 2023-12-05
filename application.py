@@ -57,7 +57,7 @@ def register_user():
 def view_list():
     page = request.args.get("page", 0, type=int)
     category = request.args.get("category", "all")
-    per_page = 6
+    per_page = 9
     per_row = 3
     row_count = int(per_page/per_row)
     start_idx = per_page * page
@@ -112,7 +112,7 @@ def reg_review():
 @application.route("/review")
 def view_review():
     page = request.args.get("page", 0, type=int)
-    per_page=6 # item count to display per page
+    per_page=9 # item count to display per page
     per_row=3# item count to display per row
     row_count=int(per_page/per_row)
     start_idx=per_page*page
@@ -135,6 +135,16 @@ def view_review():
         page=page,
         page_count=int((item_counts/per_page)+1),
         total=item_counts)
+
+@application.route("/mypage_sell/<name>/")
+def view_mypage_sell(name):
+    data = DB.get_item_byseller(str(name))
+    return render_template("mypage_sell", name=name, data=data)
+
+@application.route("/mypage_review/<name>/")
+def view_mypage_review(name):
+    data = DB.get_review_byseller(str(name))
+    return render_template("mypage_review", name=name, data=data)
 
 @application.route("/view_review_detail/<name>/")
 def view_review_detail(name):
