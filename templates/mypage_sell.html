@@ -3,10 +3,11 @@
 <style>
 
     #main-container {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        margin: auto;
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border: 1px solid #efefef;
+        padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
 
@@ -33,92 +34,51 @@
 
 </style>
 
-<script>
-    function showHeart() {
-        $.ajax({
-            type: 'GET',
-            url: '/show_heart/{{name}}/',
-            data: {},
-            success: function (response)
-            {
-                let my_heart = response['my_heart'];
-                if (my_heart['interested'] == 'Y')
-                {
-                    $("#heart").css("color","red");
-                    $("#heart").attr("onclick","unlike()");
-                }
-                else{
-                    $("#heart").css("color","grey");
-                    $("#heart").attr("onclick","like()");
-                }
-                //alert("showheart!")
-            }
-        }); 
-    }
-    function like() {
-        $.ajax({
-            type: 'POST',
-            url: '/like/{{name}}/',
-            data: {
-                interested : "Y"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-    function unlike() {
-        $.ajax({
-            type: 'POST',
-            url: '/unlike/{{name}}/',
-            data: {
-                interested : "N"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-    $(document).ready(function () {
-        showHeart();
-    });
-</script>
-
 <div id="main-container">
-    <br><br>
-    <img src="../../static/images/{{data.img_path}}", width=140, height=200>
-    <br>
-    <i class="fa fa-heart" id="heart" ></i>
-    <button id="start-chat" onclick="location.href='/';">
-        채팅하기
-    </button>
-    <p>
-        카테고리 > {{data.category}}
-    </p>
-    <br>
-    <p>
-        상품명: <b>{{name}}</b>
-    </p>
-    <p>
-        상품상태: {{data.status}}
-    </p>
-    <p>
-        판매자: {{data.seller}}
-    </p>
-    <!--<p>
-        For payment, the credit card is
-        {% if data['card'] == "Y" %}
-        accepted!
-        {% endif %}
-        {% if data['card'] == "N" %}
-        NOT accepted!
-        {% endif %}
-    </p>
-    -->
-    <button onclick="location.href='/reg_review_init/{{name}}/';">
-        리뷰등록
-    </button>
+    <div id="seller-info">
+        <p>
+            Seller Name: {{name}}
+        </p>
+        <button onclick="location.href='/view_mypage_sell/{{name}}/;">
+            Market   
+        </button>
+        <button onclick="location.href='/view_mypage_review/{{name}}/;">
+            Review
+        </button>
+    </div>
+    <hr>
+    {% if total > 0 %}
+    <p>상품 리스트 -- 현재까지 {{total}}개 등록됨</p>
+    <div id="content-container">
+        <table>
+        {% for row in datas|batch(3) %}
+        <tr>
+            {% for key, value in row %}
+            <td>
+                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                    <p>상품이름: {{key}}</p>
+                    <img src="./static/images/{{value.img_path}}" width=200 height=200>
+                </div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+   <!-- 페이지네이션을 위한 코드 시작 -->
+    <div class="page-wrap">
+        <div class="page-nation">
+            <ul>
+                <li>
+                    {% for i in range(page_count) %}
+                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <p>등록된 상품이 없습니다.</p>
+    {% endif %}
 </div>
 {% endblock %}
