@@ -126,9 +126,9 @@
         <p>
             상품상태: {{data.status}}
         </p>
-        <p>
-            판매자: {{data.seller}}
-        </p>
+        <div>
+            판매자: <div onclick="location.href='/view_mypage_sell/{{data.seller}}/;" style="cursor:pointer;">{{data.seller}}</div>
+        </div>
         <!--<p>
             For payment, the credit card is
             {% if data['card'] == "Y" %}

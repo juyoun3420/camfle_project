@@ -4,32 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="https://webfontworld.github.io/pretendard/Pretendard.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>    
 </head>
-<body>
-    <nav class="navbar">
+<body style="background-color: #FFE1EC;">
+    <nav class="navbar" style="background-color: #F44D99;">
         <div class="navbar__logo">
-
-            <a href="/list">Giboo & Take</a>
+            <a href="/list" style="font-family: 'Pretendard'; font-size: 2.0rem">🙏 Giboo & Take </a>
         </div>
-        <ul class="navbar__menu">
+        <ul class="navbar__menu" style="align-items: center;">
+            <li><a href="/list" style="font-family: 'Pretendard'; margin-right: 30px;">제품 피드🪽</a></li>
+            <li><a href="/review" style="font-family: 'Pretendard'; margin-right: 30px;">리뷰 피드🪽</a></li>
+            <li><a href="/reg_items" style="font-family: 'Pretendard'; margin-right: 30px;">제품 등록🪽</a></li>
+            
             {% if session['id'] %}
-            <li><a href="/mypage_sell">마이 페이지 </a></li>
-            <li><a href="/logout"><b>{{session['id']}}님 반갑습니다!</b> 로그아웃</a></li>
+            <li><a href="/logout" style="font-family: 'Pretendard';"><b>{{session['id']}}님 반갑습니다!</b> Logout🪽</a></li>
             {% else %}
-            <li><a href="/login">로그인</a></li>
+            <li><a href="/login" style="font-family: 'Pretendard';">Login🪽</a></li>
             {% endif %}
         
-            <li><a href="/list">제품 피드</a></li>
-            <li><a href="/review">리뷰 피드</a></li>
-            <li><a href="/reg_items">제품 등록</a></li>
+            
         </ul>
-        <a href="#" class="navbar__toogleBtn">
-            <i class="fas fa-bars"></i>
-        </a>
+        
     </nav>
     <section>
         {% block section %}
