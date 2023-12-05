@@ -28,10 +28,6 @@
         border-collapse: collapse;
     }
 
-    td {
-        padding: 10px;
-    }
-
     .page-wrap {
         margin-top: 20px;
     }
@@ -68,7 +64,7 @@
             </tr>
             <tr>
                 {% for key, value in row1 %}
-                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=200, height=200></td>
                 {% endfor %}
             </tr>
             <tr>
@@ -78,7 +74,7 @@
             </tr>
             <tr>
                 {% for key, value in row2 %}
-                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=200, height=200></td>
                 {% endfor %}
             </tr>
         </table>

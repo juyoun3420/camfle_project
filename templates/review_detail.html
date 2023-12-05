@@ -1,12 +1,129 @@
-{% extends "index.html" %}
+ {% extends "index.html" %}
  {% block section %}
-<p>
-    review title is <b>{{data.title}}</b> and rate is {{data.rate}} points our of 5 points
-</p>
+<style>
 
-<img src="../../static/images/{{data.img_path}}", width=240, height=200>
+    #main-container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border: 1px solid #efefef;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
+    }
 
-<p>
-    {{data.review}}
-</p>
+    #content-container{
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    .page-wrap {
+        margin-top: 20px;
+    }
+
+    .page-nation {
+        display: flex;
+        justify-content: center;
+    }
+
+    .page-nation ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-nation a {
+        padding: 5px 10px;
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<script>
+    function showHeart() {
+        $.ajax({
+            type: 'GET',
+            url: '/show_heart/{{name}}/',
+            data: {},
+            success: function (response)
+            {
+                let my_heart = response['my_heart'];
+                if (my_heart['interested'] == 'Y')
+                {
+                    $("#heart").css("color","red");
+                    $("#heart").attr("onclick","unlike()");
+                }
+                else{
+                    $("#heart").css("color","grey");
+                    $("#heart").attr("onclick","like()");
+                }
+                //alert("showheart!")
+            }
+        }); 
+    }
+    function like() {
+        $.ajax({
+            type: 'POST',
+            url: '/like/{{name}}/',
+            data: {
+                interested : "Y"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
+            }
+        });
+    }
+    function unlike() {
+        $.ajax({
+            type: 'POST',
+            url: '/unlike/{{name}}/',
+            data: {
+                interested : "N"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
+            }
+        });
+    }
+    $(document).ready(function () {
+        showHeart();
+    });
+</script>
+
+<div id="main-container">
+    <div id="content-container">
+
+        <br><br>
+        <img src="../../static/images/{{data.img_path}}", width=200, height=200>
+        <br>
+        <i class="fa fa-heart" id="heart" ></i>
+        <br>
+        <p>
+            리뷰 제목: {{data.title}}
+        </p>
+        <p>
+            제품 평점: {{data.rate}}/5
+        </p>
+        <p>
+            제품 리뷰: {{data.review}}
+        </p>
+
+     </div>
+</div>
 {% endblock %}
