@@ -66,7 +66,6 @@ def view_list():
         data = DB.get_items()
     else :
         data = DB.get_items_bycategory(category)
-    data = DB.get_items()
     data = dict(sorted(data.items(), key=lambda x:x[0], reverse=False))
     item_counts = len(data)
     if item_counts <= per_page:
