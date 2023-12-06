@@ -26,8 +26,7 @@ class DBhandler:
     def insert_user(self, data, pw):
         user_info ={
             "id": data['id'],
-            "pw": pw,
-            "nickname": data['nickname']
+            "pw": pw
         }
         if self.user_duplicate_check(str(data['id'])):
             self.db.child("user").push(user_info)
@@ -111,11 +110,12 @@ class DBhandler:
                 target_value=res.val()
                 return target_value
 
-    def reg_review(self, data, img_path):
+    def reg_review(self, uid, data, img_path):
         review_info ={
             "title": data['title'],
             "rate": data['reviewStar'],
             "review": data['reviewContents'],
+            "writer": uid,
             "img_path": img_path
         }
         self.db.child("review").child(data['name']).set(review_info)
