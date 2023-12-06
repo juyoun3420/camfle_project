@@ -17,6 +17,8 @@ class DBhandler:
             "addr": data['addr'],
             "category": data['category'],
             "status": data['status'],
+            "sold": False,
+            "buyer": None,
             "img_path": img_path
         }
         self.db.child("item").child(name).set(item_info)
