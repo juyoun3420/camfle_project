@@ -12,7 +12,7 @@ class DBhandler:
     def insert_item(self, name, data, img_path):
         item_info ={
             "price": data['price'],
-            "ok-price": data['ok-price']
+            "ok-price": data['ok-price'],
             "seller": data['seller'],
             "addr": data['addr'],
             "category": data['category'],
@@ -82,7 +82,7 @@ class DBhandler:
                 
         return new_dict
     
-    def get_item_byseller(self,name):
+    def get_item_byseller(self, name):
         items=self.db.child("item").get()
         target_value=[]
         target_key=[]
@@ -154,5 +154,3 @@ class DBhandler:
                 }
                 self.db.child("heart").child(user_id).child(item).set(heart_info)
                 return True
-    
-    
