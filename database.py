@@ -116,7 +116,10 @@ class DBhandler:
             if key_value == name:
                 target_value=res.val()
                 return target_value
-
+    def update_sold(self, uid, name, data):
+        item = self.db.child("item").get()
+        
+        
     def reg_review(self, uid, data, img_path):
         review_info ={
             "title": data['title'],
