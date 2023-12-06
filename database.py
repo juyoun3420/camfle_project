@@ -18,7 +18,7 @@ class DBhandler:
             "category": data['category'],
             "status": data['status'],
             "sold": False,
-            "buyer": None,
+            "buyer": "",
             "img_path": img_path
         }
         self.db.child("item").child(name).set(item_info)
@@ -116,9 +116,19 @@ class DBhandler:
             if key_value == name:
                 target_value=res.val()
                 return target_value
+            
     def update_sold(self, uid, name, data):
-        item = self.db.child("item").get()
-        
+        items = self.db.child("item").get()
+        print("###########", name)
+        for res in items.each():
+            key_value = res.key()
+            if key_value == name:
+                item_ref = self.db.child("item").child(name)
+                target_value = res.val()
+                target_value['sold'] = True
+                target_value['buyer'] = uid
+                item_ref.update(target_value)
+                return target_value
         
     def reg_review(self, uid, data, img_path):
         review_info ={
