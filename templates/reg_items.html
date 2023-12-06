@@ -20,52 +20,58 @@
 <div id="main-container">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
         <div><br><br>
-            <label for="name">Item name: </label>
+            <label for="name"> 상품명 : </label>
             <input type="text" name="name" id="name" required><br><br>
         </div>
         <div>
-            <label for="seller"> Seller ID: </label>
+            <label for="seller"> 판매자 ID : </label>
             <input type="text" name="seller" id="seller" required><br><br>
         </div>
         <div>
-            <label for="addr"> Address: </label>
+            <label for="addr"> 거래희망장소 : </label>
             <input type="text" name="addr" id="addr" required><br><br>
         </div>
         <div>
-            <label for="tel">Email: </label>
-            <input type="text" name="email" id="email" required><br><br>
+            <label for="price"> 구매가격 : </label>
+            <input type="text" name="price" id="price" required><br><br>
         </div>
         <div>
-            <label for="category">Category: </label>
+            <label for="category">카테고리 : </label>
             <br>
             <select id="category" name="category">
-                <option value="Clothes" selected> Clothes </option>
-                <option value="Beauty"> Beauty </option>
-                <option value="Books"> Books </option>
-                <option value="Furniture"> Furniture </option>
-                <option value="Electronics"> Electronics </option>
+                <option value="Clothes" selected> 의류 </option>
+                <option value="Beauty"> 뷰티 </option>
+                <option value="Books"> 도서 </option>
+                <option value="Furniture"> 가구 </option>
+                <option value="Electronics"> 물품 </option>
                 <option value="ETC"> ETC </option>
             </select><br><br>
             <div>
-                <label for="card">Credit Card? (Y/N): </label>
+                <label for="time"> 구매시기 : </label>
                 <br>
-                <select id="card" name="card">
-                    <option value="Y" selected>Yes</option>
-                    <option value="N">No</option>
+                <select id="time" name="time">
+                    <option value="1month" selected>1개월 이내</option>
+                    <option value="3month">3개월 이내</option>
+                    <option value="6month">6개월 이내</option>
+                    <option value="12month">12개월 이내</option>
                 </select><br><br>
             </div>
             <div>
-                <label for="status">Status? </label>
+                <label for="status"> 사용횟수 : </label>
                 <br>
                 <select id="status" name="status">
-                    <option value="new" selected>New</option>
-                    <option value="lnew">Likely New</option>
-                    <option value="used">Used</option>
+                    <option value="new" selected>미사용</option>
+                    <option value="lnew">1-5회</option>
+                    <option value="used">5회 초과</option>
                 </select><br><br>
             </div>
             <div>
-                <label for="phone">Phone : </label>
-                <input type="text" name="phone" id="phone"><br><br>
+                <label for="recommand">추천 판매가 : </label>
+                
+            </div>
+            <div>
+                <label for="ok-price">최종 판매가 : </label>
+                <input type="text" name="ok-price" id="ok-price"><br><br>
             </div>
 
             <div>
