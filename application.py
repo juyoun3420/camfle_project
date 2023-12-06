@@ -105,7 +105,7 @@ def reg_review():
     data=request.form
     image_file=request.files["file"]
     image_file.save("static/images/{}".format(image_file.filename))
-    DB.reg_review(data, image_file.filename)
+    DB.reg_review(session['id'], data, image_file.filename)
     return redirect(url_for('view_review'))
 
 @application.route("/review")

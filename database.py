@@ -11,13 +11,12 @@ class DBhandler:
             
     def insert_item(self, name, data, img_path):
         item_info ={
+            "price": data['price'],
+            "ok-price": data['ok-price'],
             "seller": data['seller'],
             "addr": data['addr'],
-            "email": data['email'],
             "category": data['category'],
-            "card": data['card'],
             "status": data['status'],
-            "phone": data['phone'],
             "img_path": img_path
         }
         self.db.child("item").child(name).set(item_info)
@@ -27,8 +26,7 @@ class DBhandler:
     def insert_user(self, data, pw):
         user_info ={
             "id": data['id'],
-            "pw": pw,
-            "nickname": data['nickname']
+            "pw": pw
         }
         if self.user_duplicate_check(str(data['id'])):
             self.db.child("user").push(user_info)
@@ -83,7 +81,7 @@ class DBhandler:
                 
         return new_dict
     
-    def get_item_byseller(self,name):
+    def get_item_byseller(self, name):
         items=self.db.child("item").get()
         target_value=[]
         target_key=[]
@@ -112,11 +110,12 @@ class DBhandler:
                 target_value=res.val()
                 return target_value
 
-    def reg_review(self, data, img_path):
+    def reg_review(self, uid, data, img_path):
         review_info ={
             "title": data['title'],
             "rate": data['reviewStar'],
             "review": data['reviewContents'],
+            "writer": uid,
             "img_path": img_path
         }
         self.db.child("review").child(data['name']).set(review_info)
@@ -155,5 +154,3 @@ class DBhandler:
                 }
                 self.db.child("heart").child(user_id).child(item).set(heart_info)
                 return True
-    
-    
