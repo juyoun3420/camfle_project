@@ -1,5 +1,6 @@
 import pyrebase
 import json
+import array
 
 class DBhandler:
     def __init__(self ):
@@ -106,6 +107,35 @@ class DBhandler:
         for k,v in zip(target_key, target_value):
              new_dict[k]=v
                 
+        return new_dict
+    
+    def get_review_byseller(self, name):
+        items = self.db.child("item").get()
+        reviews = self.db.child("review").get()
+
+        target_value = []
+        target_key = []
+
+        for res in items.each():
+            value = res.val()
+            key_value = res.key()
+
+            if value['seller'] == name and value['sold'] == True:
+                if reviews:
+                    for rev_res in reviews.each():
+                        rev_value = rev_res.val()
+                        rev_key_value = rev_res.key()
+                        if rev_key_value == key_value:
+                            target_value.append(rev_value)
+                            target_key.append(rev_key_value)
+
+        print("######target_value", target_value)
+
+        new_dict = {}
+
+        for k, v in zip(target_key, target_value):
+            new_dict[k] = v
+
         return new_dict
     
     def get_item_byname(self, name):
