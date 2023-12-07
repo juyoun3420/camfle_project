@@ -38,48 +38,35 @@ def logout_user():
     session.clear()
     return redirect(url_for('view_list'))
 
-@application.route("/signup")
-def signup():
-    return render_template("signup.html")
-
-@application.route("/signup_post", methods=['POST'])
-def register_user():
-    data=request.form
-    pw=request.form['pw']
-    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
-    if DB.insert_user(data,pw_hash):
-        return render_template("login.html")
-    else:
-        flash("user id already exist!")
-        return render_template("signup.html")
 
 @application.route("/list")
 def view_list():
-    page = request.args.get("page", 0, type=int)
+    page = request.args.get("page", 0, type=int)  # 페이지를 0부터 시작하도록 조정
     category = request.args.get("category", "all")
-    per_page = 9
+    per_page = 6
     per_row = 3
-    row_count = int(per_page/per_row)
-    start_idx = per_page * page
-    end_idx = per_page*(page+1)
+    row_count = int(per_page / per_row)
+    start_idx = per_page * page  # 시작 인덱스를 조정
+    end_idx = per_page * (page + 1)
     if category == "all":
         data = DB.get_items()
-    else :
+    else:
         data = DB.get_items_bycategory(category)
-    data = dict(sorted(data.items(), key=lambda x:x[0], reverse=False))
+    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False))
     item_counts = len(data)
-    if item_counts <= per_page:
-        data = dict(list(data.items())[:item_counts])
-    else :
-        data = dict(list(data.items())[start_idx:end_idx])
+
+    # 데이터 길이를 넘어가지 않도록 끝 인덱스를 조정
+    end_idx = min(end_idx, item_counts)
+
     data = dict(list(data.items())[start_idx:end_idx])
+
     tot_count = len(data)
 
     for i in range(row_count):
-        if (i == row_count-1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+        if (i == row_count - 1) and (tot_count % per_row != 0):
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i * per_row:])
         else:
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
 
     return render_template(
         "list.html",
@@ -88,9 +75,10 @@ def view_list():
         row2=locals()['data_1'].items(),
         limit=per_page,
         page=page,
-        page_count=int(math.ceil(item_counts/per_page)+1),
+        page_count=int(math.ceil(item_counts / per_page)),  # 페이지 수 계산 수정
         total=item_counts,
-        category=category)
+        category=category
+        )
 
 @application.route("/reg_items")
 def reg_item():
