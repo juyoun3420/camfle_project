@@ -13,7 +13,7 @@ class DBhandler:
     def insert_item(self, name, data, img_path):
         item_info ={
             "price": data['price'],
-            "ok-price": data['ok-price'],
+            "okprice": data['okprice'],
             "seller": data['seller'],
             "addr": data['addr'],
             "category": data['category'],
