@@ -96,6 +96,14 @@ def view_list():
 def reg_item():
     return render_template("reg_items.html")
 
+@application.route("/submit_item_post", methods=['POST'])
+def reg_item_submit_post():
+    image_file=request.files["file"]
+    image_file.save("static/images/{}".format(image_file.filename))
+    data=request.form
+    DB.insert_item(data['name'], data, image_file.filename)
+    return redirect(url_for('view_item_detail', name=data['name']))
+
 @application.route("/reg_review_init/<name>/")
 def reg_review_init(name):
     return render_template("reg_reviews.html", name=name)
@@ -223,15 +231,6 @@ def view_item_detail(name):
     print("####data:",data)
     return render_template("detail.html", name=name, data=data)
     
-@application.route("/submit_item_post", methods=['POST'])
-def reg_item_submit_post():
-    image_file=request.files["file"]
-    image_file.save("static/images/{}".format(image_file.filename))
-    data=request.form
-    DB.insert_item(data['name'], data, image_file.filename)
-    
-    return render_template("submit_item_result.html", data=data, img_path="static/images/{}".format(image_file.filename))
-
 @application.route('/buy_item/<name>/')
 def buy_item(name):
     data = DB.get_item_byname(str(name))
