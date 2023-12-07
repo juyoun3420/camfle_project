@@ -5,7 +5,7 @@
     #main-container {
         display: flex;
         flex-direction: column;
-        max-width: 600px;
+        max-width: 800px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
@@ -69,6 +69,7 @@
     .level-비싸요 {
         color: red; /* 비싸요 레벨의 글자색을 빨간색으로 지정합니다. */
     }
+    
 </style>
 
 <script>
@@ -96,13 +97,18 @@
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <p>상품이름: {{key}}</p>
-                    <p>가격: {{value.okprice}}</p>
-                    <b class="level-{{value.level}}">
-                        {{ value.level }}!
-                    </b>
-                    <img src="static/images/{{value.img_path}}" width=200 height=200>
+                <div class="item" onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                    <div>상품명: {{key}}</div>
+                    <span>
+                        <b style="font-size: 14px">{{value.okprice}}원</b>
+                        <b style="font-size: 14px; margin-left: 15px;" class="level-{{value.level}}">
+                            {{ value.level }}!
+                        </b>
+                    </span>
+                    <img src="static/images/{{value.img_path}}" width=250 height=250>
+                    <div>
+                        <br/>
+                    </div>
                 </div>
             </td>
             {% endfor %}
