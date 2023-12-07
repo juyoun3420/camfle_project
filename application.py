@@ -202,6 +202,12 @@ def reg_item_submit_post():
     
     return render_template("submit_item_result.html", data=data, img_path="static/images/{}".format(image_file.filename))
 
+@application.route('/buy_item/<name>/')
+def buy_item(name):
+    data = DB.get_item_byname(str(name))
+    data = DB.update_sold(session['id'], name, data)
+    return render_template("detail.html", name=name, data=data)
+
 @application.route('/show_heart/<name>/', methods=['GET'])
 def show_heart(name):
     my_heart = DB.get_heart_byname(session['id'],name)
