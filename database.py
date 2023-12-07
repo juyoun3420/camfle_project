@@ -14,6 +14,7 @@ class DBhandler:
         item_info ={
             "price": data['price'],
             "okprice": data['okprice'],
+            "recprice": data['recprice'],
             "seller": data['seller'],
             "addr": data['addr'],
             "category": data['category'],

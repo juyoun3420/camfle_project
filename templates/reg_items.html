@@ -79,6 +79,14 @@
             <label for="sellWithRecommand">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
+        
+        <!--recprice추가-->
+        <div>
+            <label for="recprice"></label>
+            <input type="text" name="recprice" id="recprice" readonly><br><br>
+            <input type="hidden" name="recprice" id="recprice-hidden" value="" readonly>
+        </div>
+        
         <div>
             <label for="okprice">최종 판매가 : </label>
             <input type="text" name="okprice" id="okprice"><br><br>
@@ -101,6 +109,9 @@
     var recommandPrice = document.getElementById("recommand");
     var okPriceInput = document.getElementById("okprice");
     var okPriceHiddenInput = document.getElementById("okprice-hidden");
+    
+    var recPriceInput = document.getElementById("recprice"); // 추가된 부분
+    var recPriceHiddenInput = document.getElementById("recprice-hidden"); // 추가된 부분
 
     function calculateRecommandPrice() {
         var selectedStatus = statusSelect.value;
@@ -129,6 +140,9 @@
         var calculatedPrice = parseInt(priceInput.value) * statusWeight * timeWeight;
         var recommandText = "추천 판매가: " + calculatedPrice.toFixed(0) + " 원";
         recommandPrice.textContent = recommandText;
+        
+        recPriceInput.value = calculatedPrice.toFixed(0); // 추가된 부분
+        recPriceHiddenInput.value = calculatedPrice.toFixed(0); // 추가된 부분
         
         if (sellWithRecommandCheckbox.checked) {
             okPriceInput.value = calculatedPrice.toFixed(0);
