@@ -170,10 +170,40 @@ def view_mypage_sell(name):
         total=item_counts,
         name=name)
 
-@application.route("/mypage_review/<name>/")
-def view_mypage_review(name):
+@application.route("/view_mypage_review/<name>/")
+def view_mypage_review(name):    
     data = DB.get_review_byseller(str(name))
-    return render_template("mypage_review", name=name, data=data)
+    page = request.args.get("page", 0, type=int)
+    per_page = 9
+    per_row = 3
+    row_count = int(per_page/per_row)
+    start_idx = per_page * page
+    end_idx = per_page*(page+1)
+    data = dict(sorted(data.items(), key=lambda x:x[0], reverse=False))
+    item_counts = len(data)
+    if item_counts <= per_page:
+        data = dict(list(data.items())[:item_counts])
+    else :
+        data = dict(list(data.items())[start_idx:end_idx])
+    data = dict(list(data.items())[start_idx:end_idx])
+    tot_count = len(data)
+
+    for i in range(row_count):
+        if (i == row_count-1) and (tot_count % per_row != 0):
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+        else:
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+
+    return render_template(
+        "mypage_review.html",
+        datas=data.items(),
+        row1=locals()['data_0'].items(),
+        row2=locals()['data_1'].items(),
+        limit=per_page,
+        page=page,
+        page_count=int(math.ceil(item_counts/per_page)+1),
+        total=item_counts,
+        name=name)
 
 @application.route("/view_review_detail/<name>/")
 def view_review_detail(name):
@@ -206,7 +236,7 @@ def reg_item_submit_post():
 def buy_item(name):
     data = DB.get_item_byname(str(name))
     data = DB.update_sold(session['id'], name, data)
-    return render_template("detail.html", name=name, data=data)
+    return redirect(url_for('reg_review_init', name=name))
 
 @application.route('/show_heart/<name>/', methods=['GET'])
 def show_heart(name):
