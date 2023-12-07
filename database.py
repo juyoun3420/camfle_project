@@ -148,7 +148,36 @@ class DBhandler:
             if key_value == name:
                 target_value=res.val()
                 return target_value
-            
+    
+    def get_item_bylike(self, name):
+        likes = self.db.child("heart").child(name).get()
+        items = self.db.child("item").get()
+        
+        target_value = []
+        target_key = []
+
+        for like_res in likes.each():
+            like_value = like_res.val()
+            like_key_value = like_res.key()
+
+            if like_value['interested'] == 'Y':
+                for res in items.each():
+                    value = res.val()
+                    key_value = res.key()
+                    if like_key_value == key_value:
+                        target_value.append(value)
+                        target_key.append(key_value)
+                        
+        print("######target_value", target_value)
+
+        new_dict = {}
+
+        for k, v in zip(target_key, target_value):
+            new_dict[k] = v
+
+        return new_dict
+        
+    
     def update_sold(self, uid, name, data):
         items = self.db.child("item").get()
         print("###########", name)
