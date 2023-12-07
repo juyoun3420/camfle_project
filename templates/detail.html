@@ -1,24 +1,104 @@
  {% extends "index.html" %}
  {% block section %}
 <style>
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.ttf') format("truetype");
+    font-display: swap;
+}
 
+    *{
+        font-family: 'Pretendard';
+    }
     #main-container {
-        max-width: 600px;
+        max-width: 800px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
+        display: flex;
     }
 
-    #content-container{
-        margin: auto;
-        justify-content: center;
-        align-items: center;
+    #content-container {
+        flex: 1; /* Take remaining space */
+        padding-left: 20px; /* Add some space between image and content */
+    }
+    
+    img {
+        max-width: 100%; /* Make sure the image is responsive */
+        height: auto;
     }
 
     select {
         margin-bottom: 10px;
+    }
+    
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     table {
@@ -28,6 +108,32 @@
     }
 
     td {
+        padding: 10px;
+    }
+    
+    #heart, #buy, #soldout {
+        margin-top: 10px; /* Add space between buttons */
+        cursor: pointer;
+        font-size: 35px; /* Adjust size as needed */
+    }
+
+    #buy {
+        background-color: #FF5CAA;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    #soldout {
+        background-color: black;
+        color: white;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: not-allowed;
         padding: 10px;
     }
 
@@ -50,6 +156,10 @@
         padding: 5px 10px;
         text-decoration: none;
         color: black;
+    }
+    
+    div span {
+        margin-left: 5px;
     }
 </style>
 
@@ -107,22 +217,8 @@
 </script>
 
 <div id="main-container">
+    <img src="../../static/images/{{data.img_path}}", width=400, height=400>
     <div id="content-container">
-
-        <br><br>
-        <img src="../../static/images/{{data.img_path}}", width=200, height=200>
-        <br>
-        <i class="fa fa-heart" id="heart" ></i>
-        {% if data['sold'] == False %}
-            <button id="buy" onclick="location.href='/buy_item/{{name}}/';">
-                구매하기
-            </button>
-        {% endif %}
-        {% if data['sold'] == True %}
-            <button id="soldout">
-                Sold out!
-            </button>
-        {% endif %}
         <p>
             카테고리 > {{data.category}}
         </p>
@@ -142,7 +238,19 @@
         <p>
             거래선호장소: {{data.addr}}에서 거래해요!
         </p>
-
-     </div>
+        <div class="buttons">
+            <i class="fa fa-heart" id="heart" onclick="showHeart()"></i>
+            {% if data['sold'] == False %}
+                <button id="buy" onclick="location.href='/buy_item/{{name}}/';">
+                    구매하기
+                </button>
+            {% endif %}
+            {% if data['sold'] == True %}
+                <button id="soldout" disabled>
+                    Sold out!
+                </button>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
