@@ -89,7 +89,8 @@
             <label for="img">대표이미지를 업로드 해주세요 : </label>
             <input type="file" name="file"><br><br>
         </div>
-        <input type="submit" value="상품 등록하기"><br><br>
+        <input type="hidden" name="level" id="level" value="">
+        <input type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
     </form>
 </div>
 
@@ -143,6 +144,24 @@
 
     function toggleRecommandPrice() {
         calculateRecommandPrice();
+    }
+    
+    function calculateLevel() {
+        var okPrice = parseFloat(okPriceInput.value);
+        var recPrice = parseFloat(priceInput.value);
+        var weight = (recPrice - parseFloat(priceInput.value)) * 0.25;
+
+        if (okPrice < recPrice - 2 * weight) {
+            document.getElementById("level").value = "매우착해요";
+        } else if (okPrice < recPrice - weight) {
+            document.getElementById("level").value = "착해요";
+        } else if (okPrice < recPrice + weight) {
+            document.getElementById("level").value = "합리적이에요";
+        } else if (okPrice < recPrice + 2 * weight) {
+            document.getElementById("level").value = "조금비싸요";
+        } else {
+            document.getElementById("level").value = "비싸요";
+        }
     }
 
     priceInput.addEventListener("input", calculateRecommandPrice);

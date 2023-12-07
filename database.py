@@ -18,6 +18,7 @@ class DBhandler:
             "addr": data['addr'],
             "category": data['category'],
             "status": data['status'],
+            "level": data['level'],
             "sold": False,
             "buyer": "",
             "img_path": img_path
