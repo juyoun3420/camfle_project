@@ -80,8 +80,9 @@
             <input type="checkbox" id="sellWithRecommand">
         </div>
         <div>
-            <label for="ok-price">최종 판매가 : </label>
-            <input type="text" name="ok-price" id="ok-price"><br><br>
+            <label for="okprice">최종 판매가 : </label>
+            <input type="text" name="okprice" id="okprice"><br><br>
+            <input type="hidden" name="okprice" id="okprice-hidden" value="">
         </div>
 
         <div>
@@ -98,7 +99,8 @@
     var timeSelect = document.getElementById("time");
     var sellWithRecommandCheckbox = document.getElementById("sellWithRecommand");
     var recommandPrice = document.getElementById("recommand");
-    var okPriceInput = document.getElementById("ok-price");
+    var okPriceInput = document.getElementById("okprice");
+    var okPriceHiddenInput = document.getElementById("okprice-hidden");
 
     function calculateRecommandPrice() {
         var selectedStatus = statusSelect.value;
@@ -130,11 +132,13 @@
         
         if (sellWithRecommandCheckbox.checked) {
             okPriceInput.value = calculatedPrice.toFixed(0);
+            document.getElementById("okprice").value = calculatedPrice.toFixed(0);
         } else {
             okPriceInput.value = "";
+            okPriceHiddenInput.value = "";
         }
 
-        document.getElementById("recommand-container").style.display = "flex"; // 추천 판매가 표시
+        document.getElementById("recommand-container").style.display = "flex";
     }
 
     function toggleRecommandPrice() {
