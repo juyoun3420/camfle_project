@@ -59,12 +59,12 @@
 <div id="main-container">
     <select id="category" name="category" onchange="location=this.value">
         <option value="{{url_for('view_list', page=i, category='all')}}">All</option>
-        <option value="{{url_for('view_list', page=i, category='Clothes')}}"> Clothes </option>
-        <option value="{{url_for('view_list', page=i, category='Beauty')}}"> Beauty </option>
-        <option value="{{url_for('view_list', page=i, category='Books')}}"> Books </option>
-        <option value="{{url_for('view_list', page=i, category='Furniture')}}"> Furniture </option>
-        <option value="{{url_for('view_list', page=i, category='Electronics')}}"> Electronics </option>
-        <option value="{{url_for('view_list', page=i, category='ETC')}}"> ETC </option>
+        <option value="{{url_for('view_list', page=i, category='의류')}}"> 의류 </option>
+        <option value="{{url_for('view_list', page=i, category='뷰티')}}"> 뷰티 </option>
+        <option value="{{url_for('view_list', page=i, category='도서')}}"> 도서 </option>
+        <option value="{{url_for('view_list', page=i, category='가구')}}"> 가구 </option>
+        <option value="{{url_for('view_list', page=i, category='물품')}}"> 물품 </option>
+        <option value="{{url_for('view_list', page=i, category='기타')}}"> 기타 </option>
     </select>
 
     {% if total > 0 %}

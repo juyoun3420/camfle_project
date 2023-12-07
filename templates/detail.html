@@ -114,9 +114,16 @@
         <img src="../../static/images/{{data.img_path}}", width=140, height=200>
         <br>
         <i class="fa fa-heart" id="heart" ></i>
-        <button id="start-chat" onclick="location.href='/';">
-            채팅하기
-        </button>
+        {% if data['sold'] == False %}
+            <button id="buy" onclick="location.href='/buy_item/{{name}}/';">
+                구매하기
+            </button>
+        {% endif %}
+        {% if data['sold'] == True %}
+            <button id="soldout">
+                Sold out!
+            </button>
+        {% endif %}
         <p>
             카테고리 > {{data.category}}
         </p>
