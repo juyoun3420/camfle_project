@@ -14,11 +14,11 @@ class DBhandler:
         item_info ={
             "price": data['price'],
             "okprice": data['okprice'],
-            "recprice": data['recprice'],
             "seller": data['seller'],
             "addr": data['addr'],
             "category": data['category'],
             "status": data['status'],
+            "level": data['level'],
             "sold": False,
             "buyer": "",
             "img_path": img_path

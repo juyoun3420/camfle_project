@@ -79,14 +79,6 @@
             <label for="sellWithRecommand">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
-        
-        <!--recprice추가-->
-        <div>
-            <label for="recprice"></label>
-            <input type="text" name="recprice" id="recprice" readonly><br><br>
-            <input type="hidden" name="recprice" id="recprice-hidden" value="" readonly>
-        </div>
-        
         <div>
             <label for="okprice">최종 판매가 : </label>
             <input type="text" name="okprice" id="okprice"><br><br>
@@ -97,7 +89,8 @@
             <label for="img">대표이미지를 업로드 해주세요 : </label>
             <input type="file" name="file"><br><br>
         </div>
-        <input type="submit" value="상품 등록하기"><br><br>
+        <input type="hidden" name="level" id="level" value="">
+        <input type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
     </form>
 </div>
 
@@ -109,9 +102,6 @@
     var recommandPrice = document.getElementById("recommand");
     var okPriceInput = document.getElementById("okprice");
     var okPriceHiddenInput = document.getElementById("okprice-hidden");
-    
-    var recPriceInput = document.getElementById("recprice"); // 추가된 부분
-    var recPriceHiddenInput = document.getElementById("recprice-hidden"); // 추가된 부분
 
     function calculateRecommandPrice() {
         var selectedStatus = statusSelect.value;
@@ -141,9 +131,6 @@
         var recommandText = "추천 판매가: " + calculatedPrice.toFixed(0) + " 원";
         recommandPrice.textContent = recommandText;
         
-        recPriceInput.value = calculatedPrice.toFixed(0); // 추가된 부분
-        recPriceHiddenInput.value = calculatedPrice.toFixed(0); // 추가된 부분
-        
         if (sellWithRecommandCheckbox.checked) {
             okPriceInput.value = calculatedPrice.toFixed(0);
             document.getElementById("okprice").value = calculatedPrice.toFixed(0);
@@ -157,6 +144,24 @@
 
     function toggleRecommandPrice() {
         calculateRecommandPrice();
+    }
+    
+    function calculateLevel() {
+        var okPrice = parseFloat(okPriceInput.value);
+        var recPrice = parseFloat(priceInput.value);
+        var weight = (recPrice - parseFloat(priceInput.value)) * 0.25;
+
+        if (okPrice < recPrice - 2 * weight) {
+            document.getElementById("level").value = "매우착해요";
+        } else if (okPrice < recPrice - weight) {
+            document.getElementById("level").value = "착해요";
+        } else if (okPrice < recPrice + weight) {
+            document.getElementById("level").value = "합리적이에요";
+        } else if (okPrice < recPrice + 2 * weight) {
+            document.getElementById("level").value = "조금비싸요";
+        } else {
+            document.getElementById("level").value = "비싸요";
+        }
     }
 
     priceInput.addEventListener("input", calculateRecommandPrice);
