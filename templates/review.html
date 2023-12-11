@@ -95,7 +95,7 @@
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';">
+                <div onclick="location.href='/view_review_detail/{{key}}/';">
                     <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
                     <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
                     <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
