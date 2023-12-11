@@ -1,33 +1,62 @@
- {% extends "index.html" %}
- {% block section %}
+{% extends "index.html" %}
+{% block section %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
 
     #main-container {
-        max-width: 600px;
+        max-width: 400px;
         margin: 20px auto;
-        background-color: #ffffff;
-        border: 1px solid #efefef;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex; /* 부모 요소에 display: flex 추가 */
+        flex-direction: column; /* 자식 요소를 세로로 정렬 */
     }
 
-    #content-container{
+    #main-container form {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
     }
+
+    #main-container p {
+        margin-bottom: 15px;
+    }
+
+    #main-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    #main-container input[type="submit"] {
+        background-color: #1E3269;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #main-container input[type="submit"]:hover {
+        background-color: #001529;
+    }
+
 </style>
 
 <div id="main-container">
- {% with mesg = get_flashed_messages() %}
- {% if mesg !=[] %}
-    <script>alert("{{mesg[0]}}")</script>
- {% endif %}
- {% endwith %}
+    {% with mesg = get_flashed_messages() %}
+    {% if mesg !=[] %}
+        <script>alert("{{mesg[0]}}")</script>
+    {% endif %}
+    {% endwith %}
     <form method="post" action="/signup_post">
         <p>ID: <input type="text" name="id" required></p>
         <p>Password: <input type="password" name="pw" required></p>
         <input type="submit" value="가입"/>
     </form>
 </div>
- {% endblock %}
+{% endblock %}

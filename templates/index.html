@@ -9,32 +9,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>    
+    <style>
+        body {
+            background-color: #FFEFD5;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        nav  {
+            background-color: #FFEFD5; /* 수정된 부분: 투명이 아닌 배경 색상으로 변경 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .navbar__logo a {
+            font-size: 2.0rem;
+            color: #1E3269;
+            text-decoration: none;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar__menu li {
+            margin-right: 30px;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: #1E3269;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body style="background-color: #FFE1EC;">
-    <nav class="navbar" style="background-color: #F44D99;">
+<body>
+    <nav class="navbar">
         <div class="navbar__logo">
-            <a href="/list" style="font-family: 'Pretendard'; font-size: 2.0rem">🙏 Giboo & Take </a>
+            <a href="/list">CAMFLE</a>
         </div>
-        <ul class="navbar__menu" style="align-items: center;">
-            <li><a href="/list" style="font-family: 'Pretendard'; margin-right: 30px; text-decoration-line: none;">제품 피드🪽</a></li>
-            <li><a href="/review" style="font-family: 'Pretendard'; margin-right: 30px; text-decoration-line: none;">리뷰 피드🪽</a></li>
-            <li><a href="/reg_items" style="font-family: 'Pretendard'; margin-right: 30px; text-decoration-line: none;">제품 등록🪽</a></li>
-            
+        <ul class="navbar__menu">
+            <li><a href="/list">제품 피드</a></li>
+            <li><a href="/review">리뷰 피드</a></li>
+            <li><a href="/reg_items">제품 등록</a></li>
             {% if session['id'] %}
-            <li><a href="/view_mypage_like/{{session['id']}}" style="font-family: 'Pretendard'; text-decoration-line: none;"><b>{{session['id']}}님 반갑습니다!&nbsp;&nbsp;&nbsp;&nbsp;</b></a></li>
-            <li><a href="/logout" style="font-family: 'Pretendard'; text-decoration-line: none;">Logout🪽</a></li>
+                <li><b>{{session['id']}}님 반갑습니다!</b></li>
+                <li><a href="/logout">Logout</a></li>
             {% else %}
-            <li><a href="/login" style="font-family: 'Pretendard'; text-decoration-line: none;">Login 🪽</a></li>
+                <li><a href="/login">Login</a></li>
             {% endif %}
-        
-            
         </ul>
-        
     </nav>
     <section>
         {% block section %}
-        
-        {% endblock section %}
+        {% endblock %}
     </section>
-    </body>
+</body>
 </html>
