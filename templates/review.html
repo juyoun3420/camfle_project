@@ -47,6 +47,7 @@
         border-collapse: collapse;
     }
 
+   
     .page-wrap {
         margin-top: 20px;
     }
@@ -62,10 +63,21 @@
         padding: 0;
     }
 
+    .page-nation li {
+        margin: 0 5px; /* 페이지 번호 간격 조절을 위한 좌우 마진 추가 */
+    }
+
     .page-nation a {
-        padding: 5px 10px;
+        padding: 10px; /* 페이지 번호 버튼 내부 패딩 조절 */
         text-decoration: none;
         color: black;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .page-nation a:hover {
+        background-color: #f2f2f2; /* 호버 시 배경색 변경 */
     }
 </style>
 

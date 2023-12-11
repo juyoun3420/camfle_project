@@ -4,11 +4,10 @@
     body {
         font-family: 'Pretendard', sans-serif;
     }
-
     #main-container {
         display: flex;
         flex-direction: column;
-        max-width: 600px;
+        max-width: 750px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
@@ -17,11 +16,10 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
 
-        h2 {
-        font-size: x-large;
-        text-align: center;
-        color: #1E3269;
-        margin-bottom: 20px;
+    #content-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     #seller-info {
@@ -29,44 +27,24 @@
         margin-bottom: 20px;
     }
 
-    hr {
-        border: 1px solid #ddd;
-        margin: 20px 0;
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
     }
 
-    #content-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        margin: 0 -10px;
+    select {
+        margin-bottom: 10px;
     }
 
     table {
+        margin-top: 20px;
         width: 100%;
         border-collapse: collapse;
     }
 
-    th, td {
-        padding: 10px;
-        text-align: center;
-    }
 
-    td div {
-        cursor: pointer;
-    }
-
-    p.total-info {
-        text-align: right;
-        margin-top: 10px;
-    }
-
-    p.no-items {
-        text-align: center;
-    }
-
-    p.item-info{
-        text-align: left;
-    }
 </style>
 
 <div id="main-container">
@@ -76,7 +54,7 @@
     </div>
     <hr>
     {% if total > 0 %}
-        <p class="total-info">총 {{total}}개의 좋아요한 상품</p>
+        <p style="align-self: flex-end;">총 {{total}}개의 좋아요한 상품</p>
     <div id="content-container">
             <table>
                 {% for row in datas|batch(3) %}
