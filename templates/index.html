@@ -17,7 +17,7 @@
             font-family: 'Pretendard', sans-serif;
         }
 
-        nav  {
+        .navbar  {
             background-color: #FFEFD5; /* 수정된 부분: 투명이 아닌 배경 색상으로 변경 */
             display: flex;
             justify-content: space-between;
@@ -61,7 +61,7 @@
             <li><a href="/review">리뷰 피드</a></li>
             <li><a href="/reg_items">제품 등록</a></li>
             {% if session['id'] %}
-                <li><b>{{session['id']}}님 반갑습니다!</b></li>
+                <li><a href="/view_mypage_like/{{session['id']}}"><b>{{session['id']}}님 반갑습니다!</b></a></li>
                 <li><a href="/logout">Logout</a></li>
             {% else %}
                 <li><a href="/login">Login</a></li>

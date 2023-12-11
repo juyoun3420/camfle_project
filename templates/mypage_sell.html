@@ -1,31 +1,39 @@
  {% extends "index.html" %}
  {% block section %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
 
+ 
     #main-container {
         display: flex;
         flex-direction: column;
-        display: flex;
-        flex-direction: column;
-        max-width: 600px;
+        max-width: 750px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
+        border-radius: 8px;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
-    
-    #seller-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
+
     #content-container{
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+    #seller-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
     }
 
     select {
@@ -38,15 +46,35 @@
         border-collapse: collapse;
     }
 
+    #buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* 버튼 간격 조절을 위한 상단 마진 추가 */
+    }
 
+    #buttons button {
+        padding: 10px 20px; /* 버튼 내부 패딩 설정 */
+        margin: 0 10px; /* 버튼 간격 조절을 위한 좌우 마진 추가 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #1E3269;
+        color: white;
+        transition: background-color 0.3s; /* 호버 효과를 위한 전환 효과 추가 */
+    }
+
+    #buttons button:hover {
+        background-color: #305490; /* 호버 시 배경색 변경 */
+    }
 
 </style>
 
+
 <div id="main-container">
     <div id="seller-info">
-        <p style="font-size: 20px">
-            [ {{name}} ]의 마켓 
-        </p>
+        <br><br>
+        <h2>{{name}}님의 판매 상품 </h2>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
                 Market   
@@ -67,10 +95,12 @@
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">ㅣ {{key}}</div>
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200>
-                </div>
+                 <div onclick="location.href='/view_detail/{{key}}/';">
+                            <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                            <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+                            <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
+                            <p class="item-info" style="font-size: small">{{value.level}}</p>
+                        </div>
             </td>
             {% endfor %}
         </tr>

@@ -16,7 +16,7 @@
         display: flex; /* 부모 요소에 display: flex 추가 */
         flex-direction: column; /* 자식 요소를 세로로 정렬 */
     }
-
+    
     #main-container form {
         display: flex;
         flex-direction: column;
@@ -45,6 +45,12 @@
         background-color: #001529;
     }
 
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
+    }
 </style>
 
 <div id="main-container">
@@ -53,6 +59,7 @@
         <script>alert("{{mesg[0]}}")</script>
     {% endif %}
     {% endwith %}
+    <h2>가입하기</h2>
     <form method="post" action="/signup_post">
         <p>ID: <input type="text" name="id" required></p>
         <p>Password: <input type="password" name="pw" required></p>

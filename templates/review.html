@@ -1,16 +1,20 @@
 {% extends "index.html" %}
 {% block section %}
 
-{% if total > 0 %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
 
+ 
     #main-container {
         display: flex;
         flex-direction: column;
-        max-width: 600px;
+        max-width: 750px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
+        border-radius: 8px;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
@@ -19,6 +23,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+    #seller-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
     }
 
     select {
@@ -54,51 +70,46 @@
 </style>
 
 <div id="main-container">
-
-<p style="align-self: flex-end;">
-    총 {{total}}개의 리뷰
-</p>
+    <div id="seller-info">
+        <br><br>
+        <h2>리뷰 피드</h2>
+    </div>
+    <hr>
+    {% if total > 0 %}
+    <p style="align-self: flex-end;">총 {{total}}개의 상품</p>
     <div id="content-container">
         <table>
-            <tr>
-                {% for key, value in row1 %}
-                <td>제목: {{value.title}}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for key, value in row1 %}
-                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=200, height=200></td>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for key, value in row2 %}
-                <td>제목: {{value.title}}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for key, value in row2 %}
-                <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=200, height=200></td>
-                {% endfor %}
-            </tr>
-        </table>
+        {% for row in datas|batch(3) %}
+        <tr>
+            {% for key, value in row %}
+            <td>
+                <div onclick="location.href='/view_detail/{{key}}/';">
+                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                    <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
+                    <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
+                    <p class="item-info" style="font-size: small">{{value.level}}</p>
+                </div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
     </div>
-        <div class="page-wrap">
-            <div class="page-nation">
-                <ul>
-                    <li>
-                        {% for i in range(page_count)%}
-                        <a href="{{url_for('view_review', page=i)}}" color="black">{{i+1}}</a>
-                        {% endfor %}
-                    </li>
-                </ul>
-            </div>
+    <!-- 페이지네이션을 위한 코드 시작 -->
+    <div class="page-wrap">
+        <div class="page-nation">
+            <ul>
+                <li>
+                    {% for i in range(page_count) %}
+                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
+                    {% endfor %}
+                </li>
+            </ul>
         </div>
-        {% else %}
-        <p>
-            등록된 리뷰가 없습니다.
-        </p>
-
+    </div>
+    
+    {% else %}
+    <p>등록된 리뷰가 없습니다.</p>
+    {% endif %}
 </div>
-
-{% endif %}
 {% endblock %}

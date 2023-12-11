@@ -1,19 +1,58 @@
 {% extends "index.html" %}
 {% block section %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+        background-color: #FFEFD5;
+        margin: 0;
+        padding: 0;
+    }
+
     #main-container {
+        display: flex;
+        flex-direction: column;
         max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
+        border-radius: 8px;
         padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    #content-container {
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
+    }
+
+    form {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 10px;
+        font-size: medium;
+        color: #1E3269;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="file"],
+    select {
+        width: calc(100% - 20px); /* 여백을 포함한 최대 너비 */
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .checkbox-label {
+        display: flex;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     #recommand-container {
@@ -23,90 +62,98 @@
 
     #recommand {
         margin-right: 10px;
+        color: #1E3269;
+        font-size: small;
     }
-    
-    .submitBtn{
+
+    #okprice {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    #image-preview {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .submitBtn {
         width: 150px;
         height: 35px;
-        background: black;
+        background: #1E3269;
         color: white;
         font-size: 15px;
         border-radius: 8px;
         border-style: none;
         font-family: "Pretendard";
+        cursor: pointer;
+        margin: 0 auto; /* 가운데 정렬을 위해 추가한 부분 */
+        display: block; /* 가운데 정렬을 위해 추가한 부분 */
     }
-    
+
+    .submitBtn:hover {
+        background: #305490;
+    }
 </style>
+
 <div id="main-container">
-    <h2>
-        ㅣ 상품 등록
-    </h2>
+    <h2>상품 등록</h2>
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
-        <div><br>
-            <label for="name"> 상품명 : </label>
-            <input type="text" name="name" id="name" required><br><br>
-        </div>
-        <div>
-            <label for="seller"> 판매자 ID : </label>
-            <input type="text" name="seller" id="seller" required><br><br>
-        </div>
-        <div>
-            <label for="addr"> 거래희망장소 : </label>
-            <input type="text" name="addr" id="addr" required><br><br>
-        </div>
-        <div>
-            <label for="price"> 구매가격 : </label>
-            <input type="text" name="price" id="price" required><br><br>
-        </div>
-        <span>
-            <label for="category">카테고리 : </label>
-            
-            <select id="category" name="category">
-                <option value="의류" selected> 의류 </option>
-                <option value="뷰티"> 뷰티 </option>
-                <option value="도서"> 도서 </option>
-                <option value="가구"> 가구 </option>
-                <option value="물품"> 물품 </option>
-                <option value="기타"> 기타 </option>
-            </select><br><br>
-        </span>
-        <span>
-            <label for="time"> 구매시기 : </label>
-            
-            <select id="time" name="time">
-                <option value="1개월 이내" selected>1개월 이내</option>
-                <option value="3개월 이내">3개월 이내</option>
-                <option value="6개월 이내">6개월 이내</option>
-                <option value="12개월 이내">12개월 이내</option>
-            </select><br><br>
-        </span>
-        <span>
-            <label for="status"> 사용횟수 : </label>
-            
-            <select id="status" name="status">
-                <option value="미사용" selected>미사용</option>
-                <option value="1-5회">1-5회</option>
-                <option value="5회 초과">5회 초과</option>
-            </select><br><br>
-        </span>
-        <div id="recommand-container">
+        <label for="name">상품명:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="seller">판매자 ID:</label>
+        <input type="text" name="seller" id="seller" required>
+
+        <label for="addr">거래희망장소:</label>
+        <input type="text" name="addr" id="addr" required>
+
+        <label for="price">구매가격:</label>
+        <input type="text" name="price" id="price" required>
+
+        <label for="category">카테고리:</label>
+        <select id="category" name="category">
+            <option value="의류" selected>의류</option>
+            <option value="뷰티">뷰티</option>
+            <option value="도서">도서</option>
+            <option value="가구">가구</option>
+            <option value="물품">물품</option>
+            <option value="기타">기타</option>
+        </select>
+
+        <label for="time">구매시기:</label>
+        <select id="time" name="time">
+            <option value="1개월 이내" selected>1개월 이내</option>
+            <option value="3개월 이내">3개월 이내</option>
+            <option value="6개월 이내">6개월 이내</option>
+            <option value="12개월 이내">12개월 이내</option>
+        </select>
+
+        <label for="status">사용횟수:</label>
+        <select id="status" name="status">
+            <option value="미사용" selected>미사용</option>
+            <option value="1-5회">1-5회</option>
+            <option value="5회 초과">5회 초과</option>
+        </select>
+
+        <div class="checkbox-label" id="recommand-container">
             <div id="recommand"></div>
             <label for="sellWithRecommand">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
-        <div>
-            <label for="okprice"><br>최종 판매가 : </label>
-            <input type="text" name="okprice" id="okprice"><br><br>
-            <input type="hidden" name="okprice" id="okprice-hidden" value="">
-        </div>
 
-        <div>
-            <label for="img">이미지를 업로드 해주세요 : </label>
-            <input type="file" name="file" onchange="showImagePreview(this)"><br><br>
-            <img id="image-preview" style="max-width: 300px; max-height: 300px;"><br><br>
-        </div>
-        <input type="hidden" name="level" id="level" value=""><br>
-        <input style="margin-left: 230px" class="submitBtn" type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
+        <label for="okprice">최종 판매가:</label>
+        <input type="text" name="okprice" id="okprice">
+        <input type="hidden" name="okprice" id="okprice-hidden" value="">
+
+        <label for="img">이미지를 업로드 해주세요:</label>
+        <input type="file" name="file" onchange="showImagePreview(this)">
+        <img id="image-preview">
+
+        <input class="submitBtn" type="submit" value="상품 등록하기" onclick="calculateLevel()">
     </form>
 </div>
 

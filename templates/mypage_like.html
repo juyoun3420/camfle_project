@@ -1,6 +1,9 @@
- {% extends "index.html" %}
- {% block section %}
+{% extends "index.html" %}
+{% block section %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
 
     #main-container {
         display: flex;
@@ -9,64 +12,91 @@
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
+        border-radius: 8px;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
+
+        h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
+    }
     
     #seller-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    #content-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    select {
-        margin-bottom: 10px;
+    hr {
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    #content-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 0 -10px;
     }
 
     table {
-        margin-top: 20px;
         width: 100%;
         border-collapse: collapse;
     }
 
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    td div {
+        cursor: pointer;
+    }
+
+    p.total-info {
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    p.no-items {
+        text-align: center;
+    }
+
+    p.item-info{
+        text-align: left;
+    }
 </style>
 
 <div id="main-container">
     <div id="seller-info">
-        <p>
-            {{session['id']}}님의 Like Items!
-        </p>
+        <br><br>
+        <h2>{{session['id']}}님이 좋아요한 상품</h2>
     </div>
-    <div>
-        <hr>
-    </div>
+    <hr>
     {% if total > 0 %}
-    <p style="align-self: flex-end;">총 {{total}}개의 좋아요 한 상품</p>
+        <p class="total-info">총 {{total}}개의 좋아요한 상품</p>
     <div id="content-container">
-        <table>
-        {% for row in datas|batch(3) %}
-        <tr>
-            {% for key, value in row %}
-            <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <p>상품이름: {{key}}</p>
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200>
-                </div>
-            </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-    </div>
+            <table>
+                {% for row in datas|batch(3) %}
+                <tr>
+                    {% for key, value in row %}
+                    <td>
+                        <div onclick="location.href='/view_detail/{{key}}/';">
+                            <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                            <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+                            <p class="item-info" style="font-size: small">{{value.okprice}}</p>
+                            <p class="item-info" style="font-size: small">{{value.level}}</p>
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
-    <p>좋아요한 아이템이 없습니다.</p>
+        <p class="no-items">좋아요한 아이템이 없습니다.</p>
     {% endif %}
 </div>
 {% endblock %}

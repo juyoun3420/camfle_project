@@ -65,6 +65,13 @@
         background-color: #001529;
     }
 
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
+    }
+
 </style>
 
 <div id="main-container">
@@ -73,6 +80,9 @@
         <script>alert("{{mesg[0]}}")</script>
     {% endif %}
     {% endwith %}
+    <h2>
+        로그인
+    </h2>
     <form action="/login_confirm" method="post">
         <p>ID: <input type="text" name="id"></p>
         <p>Password: <input type="password" name="pw"></p>

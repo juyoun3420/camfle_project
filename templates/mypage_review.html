@@ -1,29 +1,39 @@
  {% extends "index.html" %}
  {% block section %}
 <style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
 
+ 
     #main-container {
         display: flex;
         flex-direction: column;
-        max-width: 600px;
+        max-width: 750px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
+        border-radius: 8px;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
-    
-    #seller-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
+
     #content-container{
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+    #seller-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #1E3269;
+        margin-bottom: 20px;
     }
 
     select {
@@ -36,14 +46,34 @@
         border-collapse: collapse;
     }
 
+    #buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* 버튼 간격 조절을 위한 상단 마진 추가 */
+    }
 
+    #buttons button {
+        padding: 10px 20px; /* 버튼 내부 패딩 설정 */
+        margin: 0 10px; /* 버튼 간격 조절을 위한 좌우 마진 추가 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #1E3269;
+        color: white;
+        transition: background-color 0.3s; /* 호버 효과를 위한 전환 효과 추가 */
+    }
+
+    #buttons button:hover {
+        background-color: #305490; /* 호버 시 배경색 변경 */
+    }
+    
 </style>
 
 <div id="main-container">
     <div id="seller-info">
-        <p style="font-size: 20px">
-            [ {{name}} ]의 리뷰들
-        </p>
+        <br><br>
+        <h2>{{name}}님이 판매한 물품 리뷰</h2>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
                 Market   
@@ -57,20 +87,18 @@
         <hr>
     </div>
     {% if total > 0 %}
-<<<<<<< HEAD
-    <p>총 {{total}}개의 리뷰 등록됨</p>
-=======
     <p style="align-self: flex-end;">총 {{total}}개 리뷰 등록됨</p>
->>>>>>> 6a0a7e630f3d277301f98802e1ff4063bbcfe9db
     <div id="content-container">
         <table>
         {% for row in datas|batch(3) %}
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;">
-                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">ㅣ {{key}}</div>
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200>
+                <div onclick="location.href='/view_detail/{{key}}/';">
+                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                    <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
+                    <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
+                    <p class="item-info" style="font-size: small">{{value.level}}</p>
                 </div>
             </td>
             {% endfor %}
@@ -78,8 +106,6 @@
         {% endfor %}
     </table>
     </div>
-   <!-- 페이지네이션을 위한 코드 시작 -->
-
     {% else %}
     <p>등록된 리뷰가 없습니다.</p>
     {% endif %}
