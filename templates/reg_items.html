@@ -134,12 +134,11 @@
         if (sellWithRecommandCheckbox.checked) {
             okPriceInput.value = calculatedPrice.toFixed(0);
             document.getElementById("okprice").value = calculatedPrice.toFixed(0);
-        } else {
-            okPriceInput.value = "";
-            okPriceHiddenInput.value = "";
-        }
+        } 
 
         document.getElementById("recommand-container").style.display = "flex";
+        
+        return calculatedPrice;
     }
 
     function toggleRecommandPrice() {
@@ -148,7 +147,7 @@
     
     function calculateLevel() {
         var okPrice = parseFloat(okPriceInput.value);
-        var recPrice = parseFloat(priceInput.value);
+        var recPrice = calculateRecommandPrice();
         var weight = (recPrice - parseFloat(priceInput.value)) * 0.25;
 
         if (okPrice < recPrice - 2 * weight) {

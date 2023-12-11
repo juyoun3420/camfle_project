@@ -3,6 +3,8 @@
 <style>
 
     #main-container {
+        display: flex;
+        flex-direction: column;
         max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
@@ -39,7 +41,7 @@
 
 <div id="main-container">
     <div id="seller-info">
-        <p>
+        <p style="font-size: 20px">
             Seller Name: {{name}}
         </p>
         <div id="buttons" style="display:flex;">
@@ -51,9 +53,11 @@
             </button>
         </div>
     </div>
-    <hr>
+    <div>
+        <hr>
+    </div>
     {% if total > 0 %}
-    <p>리뷰 리스트 -- 현재까지 {{total}}개 등록됨</p>
+    <p style="align-self: flex-end;">총 {{total}}개 리뷰 등록됨</p>
     <div id="content-container">
         <table>
         {% for row in datas|batch(3) %}
