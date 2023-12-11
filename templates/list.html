@@ -3,9 +3,7 @@
 <style>
 
     #main-container {
-        display: flex;
-        flex-direction: column;
-        max-width: 800px;
+        max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
@@ -54,22 +52,14 @@
         color: blue; /* 매우 착해요 레벨의 글자색을 초록색으로 지정합니다. */
     }
 
-    .level-착해요 {
-        color: green; /* 착해요 레벨의 글자색을 파란색으로 지정합니다. */
-    }
 
     .level-합리적이에요 {
-        color: yellow; /* 합리적이에요 레벨의 글자색을 주황색으로 지정합니다. */
-    }
-
-    .level-조금비싸요 {
-        color: orange; /* 조금 비싸요 레벨의 글자색을 노란색으로 지정합니다. */
+        color: green; /* 합리적이에요 레벨의 글자색을 주황색으로 지정합니다. */
     }
 
     .level-비싸요 {
         color: red; /* 비싸요 레벨의 글자색을 빨간색으로 지정합니다. */
     }
-    
 </style>
 
 <script>
@@ -80,7 +70,7 @@
 </script>
 
 <div id="main-container">
-    <select style="width: 100px; height: 25px;" id="category" name="category" onchange="location=this.value">
+    <select id="category" name="category" onchange="location=this.value">
         <option value="{{url_for('view_list', page=i, category='all')}}">All</option>
         <option value="{{url_for('view_list', page=i, category='의류')}}"> 의류 </option>
         <option value="{{url_for('view_list', page=i, category='뷰티')}}"> 뷰티 </option>
@@ -89,26 +79,22 @@
         <option value="{{url_for('view_list', page=i, category='물품')}}"> 물품 </option>
         <option value="{{url_for('view_list', page=i, category='기타')}}"> 기타 </option>
     </select>
+
     {% if total > 0 %}
-    <p style="align-self: flex-end;">총 {{total}}개의 상품 등록</p>
+    <p>상품 리스트 -- 현재까지 {{total}}개 등록됨</p>
    <div id="content-container">
     <table>
         {% for row in datas|batch(3) %}
         <tr>
             {% for key, value in row %}
             <td>
-                <div class="item" onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <div>상품명: {{key}}</div>
-                    <span>
-                        <b style="font-size: 14px">{{value.okprice}}원</b>
-                        <b style="font-size: 14px; margin-left: 15px;" class="level-{{value.level}}">
-                            {{value.level}}!
-                        </b>
-                    </span>
-                    <img src="static/images/{{value.img_path}}" width=250 height=250>
-                    <div>
-                        <br/>
-                    </div>
+                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                    <p>상품이름: {{key}}</p>
+                    <p>가격: {{value.okprice}}</p>
+                    <b class="level-{{value.level}}">
+                        {{ value.level }}!
+                    </b>
+                    <img src="static/images/{{value.img_path}}" width=200 height=200>
                 </div>
             </td>
             {% endfor %}
@@ -123,7 +109,7 @@
             <ul>
                 <li>
                     {% for i in range(page_count) %}
-                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
+                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
                     {% endfor %}
                 </li>
             </ul>
