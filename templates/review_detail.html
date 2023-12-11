@@ -3,6 +3,8 @@
 <style>
 
     #main-container {
+        display: flex;
+        flex-direction:row;
         max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
@@ -12,45 +14,14 @@
     }
 
     #content-container{
+        width: 250px;
         margin: auto;
-        justify-content: center;
-        align-items: center;
-    }
-
-    select {
-        margin-bottom: 10px;
-    }
-
-    table {
-        margin-top: 20px;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    td {
-        padding: 10px;
-    }
-
-    .page-wrap {
-        margin-top: 20px;
-    }
-
-    .page-nation {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items:flex-start;
+        justify-content: space-around;
     }
 
-    .page-nation ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .page-nation a {
-        padding: 5px 10px;
-        text-decoration: none;
-        color: black;
-    }
 </style>
 
 <script>
@@ -107,23 +78,23 @@
 </script>
 
 <div id="main-container">
+    <img src="../../static/images/{{data.img_path}}", width=300, height=300>
+    
     <div id="content-container">
-
-        <br><br>
-        <img src="../../static/images/{{data.img_path}}", width=200, height=200>
+        <h3>
+            ㅣ 리뷰 제목
+        </h3>
+        <span>{{data.title}}</span>
+         <h3>
+            ㅣ 제품 평점
+        </h3>
+        <span>{{data.rate}}/5</span>
+         <h3>
+            ㅣ 제품 리뷰
+        </h3>
+        <span>{{data.review}}</span>
         <br>
         <i class="fa fa-heart" id="heart" ></i>
-        <br>
-        <p>
-            리뷰 제목: {{data.title}}
-        </p>
-        <p>
-            제품 평점: {{data.rate}}/5
-        </p>
-        <p>
-            제품 리뷰: {{data.review}}
-        </p>
-
      </div>
 </div>
 
