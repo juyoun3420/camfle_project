@@ -42,7 +42,7 @@
 <div id="main-container">
     <div id="seller-info">
         <p style="font-size: 20px">
-            Seller Name: {{name}}
+            [ {{name}} ]의 리뷰들
         </p>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
@@ -64,7 +64,7 @@
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                <div onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;">
                     <p>상품이름: {{key}}</p>
                     <img src="/static/images/{{value.img_path}}" width=200 height=200>
                 </div>
