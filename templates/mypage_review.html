@@ -65,7 +65,7 @@
             {% for key, value in row %}
             <td>
                 <div onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;">
-                    <p>상품이름: {{key}}</p>
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">ㅣ {{key}}</div>
                     <img src="/static/images/{{value.img_path}}" width=200 height=200>
                 </div>
             </td>
