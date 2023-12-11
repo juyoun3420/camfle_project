@@ -3,7 +3,9 @@
 <style>
 
     #main-container {
-        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        max-width: 750px;
         margin: 20px auto;
         background-color: #ffffff;
         border: 1px solid #efefef;
@@ -70,7 +72,7 @@
 </script>
 
 <div id="main-container">
-    <select id="category" name="category" onchange="location=this.value">
+    <select style="width: 100px; height: 25px;" id="category" name="category" onchange="location=this.value">
         <option value="{{url_for('view_list', page=i, category='all')}}">All</option>
         <option value="{{url_for('view_list', page=i, category='의류')}}"> 의류 </option>
         <option value="{{url_for('view_list', page=i, category='뷰티')}}"> 뷰티 </option>
@@ -81,20 +83,25 @@
     </select>
 
     {% if total > 0 %}
-    <p>상품 리스트 -- 현재까지 {{total}}개 등록됨</p>
+   <p style="align-self: flex-end;">총 {{total}}개의 상품 등록</p>
    <div id="content-container">
     <table>
         {% for row in datas|batch(3) %}
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <p>상품이름: {{key}}</p>
-                    <p>가격: {{value.okprice}}</p>
-                    <b class="level-{{value.level}}">
-                        {{ value.level }}!
-                    </b>
-                    <img src="static/images/{{value.img_path}}" width=200 height=200>
+                <div class="item" onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                    <div>상품명: {{key}}</div>
+                    <span>
+                        <b style="font-size: 14px">{{value.okprice}}원</b>
+                        <b style="font-size: 14px; margin-left: 15px;" class="level-{{value.level}}">
+                            {{ value.level }}!
+                        </b>
+                    </span>
+                    <img src="static/images/{{value.img_path}}" width=250 height=250>
+                    <div>
+                        <br/>
+                    </div>
                 </div>
             </td>
             {% endfor %}
@@ -109,7 +116,7 @@
             <ul>
                 <li>
                     {% for i in range(page_count) %}
-                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+                    <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
                     {% endfor %}
                 </li>
             </ul>
