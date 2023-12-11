@@ -3,6 +3,8 @@
 <style>
 
     #main-container {
+        display: flex;
+        flex-direction: column;
         max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
@@ -39,8 +41,8 @@
 
 <div id="main-container">
     <div id="seller-info">
-        <p>
-            Seller Name: {{name}}
+        <p style="font-size: 20px">
+            [ {{name}} ]의 리뷰들
         </p>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
@@ -51,17 +53,23 @@
             </button>
         </div>
     </div>
-    <hr>
+    <div>
+        <hr>
+    </div>
     {% if total > 0 %}
+<<<<<<< HEAD
     <p>총 {{total}}개의 리뷰 등록됨</p>
+=======
+    <p style="align-self: flex-end;">총 {{total}}개 리뷰 등록됨</p>
+>>>>>>> 6a0a7e630f3d277301f98802e1ff4063bbcfe9db
     <div id="content-container">
         <table>
         {% for row in datas|batch(3) %}
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                    <p>상품이름: {{key}}</p>
+                <div onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;">
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">ㅣ {{key}}</div>
                     <img src="/static/images/{{value.img_path}}" width=200 height=200>
                 </div>
             </td>

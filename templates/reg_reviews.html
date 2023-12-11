@@ -15,14 +15,38 @@
         justify-content: center;
         align-items: center;
     }
+    
+    .submitBtn{
+        width: 150px;
+        height: 35px;
+        background: black;
+        color: white;
+        font-size: 15px;
+        border-radius: 8px;
+        border-style: none;
+        font-family: "Pretendard";
+    }
 </style>
 
 <div id="main-container">
     <form class="mb-3" name="myform" id="myform" method="post" action="/reg_review" enctype="multipart/form-data">
-        상품: <input type="text" name="name" id="name" value="{{name}}"><br><br>
-        제목: <input type="text" name="title" id="title" value=""><br><br>
+        <div>
+            <h3>
+            ㅣ 상품
+            </h3>
+            <div><hr></div>
+            <input type="text" name="name" id="name" value="{{name}}"><br><br>
+        </div>
+        <div>
+            <h3>
+            ㅣ 제목
+            </h3>
+            <div><hr></div>
+            <input type="text" name="title" id="title" value=""><br><br>
+        </div>
+        <h3>ㅣ 별점을 선택해주세요</h3>
+        <div><hr></div>
         <fieldset>
-            <span class="text-bold">별점을 선택해주세요</span>
             <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
             <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
             <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
@@ -30,11 +54,15 @@
             <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
         </fieldset>
         <div>
-            <textarea class="col-auto form-control" type="text" name="reviewContents" placeholder="리뷰를 남겨주세요 감사합니다!"></textarea>
+            <br>
+            <textarea style="width: 500px;" class="col-auto form-control" type="text" name="reviewContents" placeholder="리뷰를 남겨주세요."></textarea>
         </div>
-        Review Image upload :
-        <input type="file" name="file" /><br><br>
-        <input type="submit" value="Submit!">
+        <h3>
+            ㅣ Review Image upload            
+        </h3>
+        <div><hr></div>
+        <input type="file" name="file" /><br><br><br><br>
+        <input type="submit" value="리뷰 등록하기" style="margin-left: 230px" class="submitBtn">
     </form>  
 </div>
  {% endblock %}

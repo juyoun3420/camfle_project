@@ -3,6 +3,8 @@
 <style>
 
     #main-container {
+        display: flex;
+        flex-direction: column;
         max-width: 600px;
         margin: 20px auto;
         background-color: #ffffff;
@@ -39,12 +41,18 @@
 <div id="main-container">
     <div id="seller-info">
         <p>
-            {{session['id']}}님의 Like !
+            {{session['id']}}님의 Like Items!
         </p>
     </div>
-    <hr>
+    <div>
+        <hr>
+    </div>
     {% if total > 0 %}
+<<<<<<< HEAD
     <p>총 {{total}}개 좋아요</p>
+=======
+    <p style="align-self: flex-end;">총 {{total}}개의 좋아요 한 상품</p>
+>>>>>>> 6a0a7e630f3d277301f98802e1ff4063bbcfe9db
     <div id="content-container">
         <table>
         {% for row in datas|batch(3) %}
