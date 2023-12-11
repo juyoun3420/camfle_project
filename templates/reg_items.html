@@ -4,17 +4,11 @@
     #main-container {
         max-width: 600px;
         margin: 20px auto;
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
         background-color: #ffffff;
         border: 1px solid #efefef;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
-    
 
     #content-container {
         display: flex;
@@ -30,7 +24,6 @@
     #recommand {
         margin-right: 10px;
     }
-    
 </style>
 <div id="main-container">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
@@ -50,8 +43,9 @@
             <label for="price"> 구매가격 : </label>
             <input type="text" name="price" id="price" required><br><br>
         </div>
-        <span>
+        <div>
             <label for="category">카테고리 : </label>
+            <br>
             <select id="category" name="category">
                 <option value="의류" selected> 의류 </option>
                 <option value="뷰티"> 뷰티 </option>
@@ -60,43 +54,43 @@
                 <option value="물품"> 물품 </option>
                 <option value="기타"> 기타 </option>
             </select><br><br>
-        </span>
-        <span>
+        </div>
+        <div>
             <label for="time"> 구매시기 : </label>
+            <br>
             <select id="time" name="time">
                 <option value="1개월 이내" selected>1개월 이내</option>
                 <option value="3개월 이내">3개월 이내</option>
                 <option value="6개월 이내">6개월 이내</option>
                 <option value="12개월 이내">12개월 이내</option>
             </select><br><br>
-        </span>
-        <span>
+        </div>
+        <div>
             <label for="status"> 사용횟수 : </label>
+            <br>
             <select id="status" name="status">
                 <option value="미사용" selected>미사용</option>
                 <option value="1-5회">1-5회</option>
                 <option value="5회 초과">5회 초과</option>
             </select><br><br>
-        </span>
+        </div>
         <div id="recommand-container">
             <div id="recommand"></div>
             <label for="sellWithRecommand">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
         <div>
-            <br>
             <label for="okprice">최종 판매가 : </label>
             <input type="text" name="okprice" id="okprice"><br><br>
             <input type="hidden" name="okprice" id="okprice-hidden" value="">
         </div>
 
         <div>
-            <label for="img">이미지를 업로드 해주세요 : </label>
-            <input type="file" name="file" onchange="showImagePreview(this)"><br><br>
-            <img id="image-preview" style="max-width: 300px; max-height: 300px;"><br><br>
+            <label for="img">대표이미지를 업로드 해주세요 : </label>
+            <input type="file" name="file"><br><br>
         </div>
         <input type="hidden" name="level" id="level" value="">
-        <input type="submit" value="상품 등록하기" onclick="calculateLevel();"><br><br><br>
+        <input type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
     </form>
 </div>
 
@@ -140,12 +134,11 @@
         if (sellWithRecommandCheckbox.checked) {
             okPriceInput.value = calculatedPrice.toFixed(0);
             document.getElementById("okprice").value = calculatedPrice.toFixed(0);
-        } else {
-            okPriceInput.value = "";
-            okPriceHiddenInput.value = "";
-        }
+        } 
 
         document.getElementById("recommand-container").style.display = "flex";
+        
+        return calculatedPrice;
     }
 
     function toggleRecommandPrice() {
@@ -154,7 +147,7 @@
     
     function calculateLevel() {
         var okPrice = parseFloat(okPriceInput.value);
-        var recPrice = parseFloat(priceInput.value);
+        var recPrice = calculateRecommandPrice();
         var weight = (recPrice - parseFloat(priceInput.value)) * 0.25;
 
         if (okPrice < recPrice - 2 * weight) {
@@ -167,25 +160,6 @@
             document.getElementById("level").value = "조금비싸요";
         } else {
             document.getElementById("level").value = "비싸요";
-        }
-    }
-    
-    function showImagePreview(input) {
-        var fileInput = input;
-        var preview = document.getElementById('image-preview');
-
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block'; // 이미지 미리보기 표시
-            };
-
-            reader.readAsDataURL(fileInput.files[0]);
-        } else {
-            preview.src = '';
-            preview.style.display = 'none'; // 파일이 선택되지 않으면 이미지 미리보기 숨김
         }
     }
 
