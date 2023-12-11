@@ -24,10 +24,25 @@
     #recommand {
         margin-right: 10px;
     }
+    
+    .submitBtn{
+        width: 150px;
+        height: 35px;
+        background: black;
+        color: white;
+        font-size: 15px;
+        border-radius: 8px;
+        border-style: none;
+        font-family: "Pretendard";
+    }
+    
 </style>
 <div id="main-container">
+    <h2>
+        ㅣ 상품 등록
+    </h2>
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
-        <div><br><br>
+        <div><br>
             <label for="name"> 상품명 : </label>
             <input type="text" name="name" id="name" required><br><br>
         </div>
@@ -43,9 +58,9 @@
             <label for="price"> 구매가격 : </label>
             <input type="text" name="price" id="price" required><br><br>
         </div>
-        <div>
+        <span>
             <label for="category">카테고리 : </label>
-            <br>
+            
             <select id="category" name="category">
                 <option value="의류" selected> 의류 </option>
                 <option value="뷰티"> 뷰티 </option>
@@ -54,43 +69,44 @@
                 <option value="물품"> 물품 </option>
                 <option value="기타"> 기타 </option>
             </select><br><br>
-        </div>
-        <div>
+        </span>
+        <span>
             <label for="time"> 구매시기 : </label>
-            <br>
+            
             <select id="time" name="time">
                 <option value="1개월 이내" selected>1개월 이내</option>
                 <option value="3개월 이내">3개월 이내</option>
                 <option value="6개월 이내">6개월 이내</option>
                 <option value="12개월 이내">12개월 이내</option>
             </select><br><br>
-        </div>
-        <div>
+        </span>
+        <span>
             <label for="status"> 사용횟수 : </label>
-            <br>
+            
             <select id="status" name="status">
                 <option value="미사용" selected>미사용</option>
                 <option value="1-5회">1-5회</option>
                 <option value="5회 초과">5회 초과</option>
             </select><br><br>
-        </div>
+        </span>
         <div id="recommand-container">
             <div id="recommand"></div>
             <label for="sellWithRecommand">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
         <div>
-            <label for="okprice">최종 판매가 : </label>
+            <label for="okprice"><br>최종 판매가 : </label>
             <input type="text" name="okprice" id="okprice"><br><br>
             <input type="hidden" name="okprice" id="okprice-hidden" value="">
         </div>
 
         <div>
-            <label for="img">대표이미지를 업로드 해주세요 : </label>
-            <input type="file" name="file"><br><br>
+            <label for="img">이미지를 업로드 해주세요 : </label>
+            <input type="file" name="file" onchange="showImagePreview(this)"><br><br>
+            <img id="image-preview" style="max-width: 300px; max-height: 300px;"><br><br>
         </div>
-        <input type="hidden" name="level" id="level" value="">
-        <input type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
+        <input type="hidden" name="level" id="level" value=""><br>
+        <input style="margin-left: 230px" class="submitBtn" type="submit" value="상품 등록하기" onclick="calculateLevel()"><br><br>
     </form>
 </div>
 
@@ -169,6 +185,25 @@
         // } else {
         //     document.getElementById("level").value = "비싸요";
         // }
+    }
+    
+    function showImagePreview(input) {
+        var fileInput = input;
+        var preview = document.getElementById('image-preview');
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // 이미지 미리보기 표시
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none'; // 파일이 선택되지 않으면 이미지 미리보기 숨김
+        }
     }
 
     priceInput.addEventListener("input", calculateRecommandPrice);
