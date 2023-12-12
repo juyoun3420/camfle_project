@@ -14,10 +14,17 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
     }
 
-    #content-container, #best-container{
+    #content-container {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+     #best-container {
+        display: flex;
+        justify-content: space-evenly; /* space-evenly로 간격을 균등하게 배치합니다. */
+        align-items: center;
+        flex-wrap: wrap; /* Flex items가 넘치면 줄 바꿈되도록 설정합니다. */
     }
     
     #seller-info {
@@ -111,32 +118,33 @@
         <option value="{{url_for('view_list', page=i, category='기타')}}"> 기타 </option>
     </select>
 
-    {% if total > 0 %}
-   <p style="align-self: flex-end;">총 {{total}}개의 상품</p>
-        <h3>Best 3 items</h3>
-        <div id="best-container">
-            <table>
-            {% for key, value in top_three_datas %}
-            <div onclick="location.href='/view_detail/{{key}}/';">
-                <div style="position: relative;">
-                    {% if value.sold == False %}
-                        <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
-                    {% else %}
-                        <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px; filter:brightness(50%)">
-                        <div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
-                            Sold Out!
-                        </div>
-                    {% endif %}
-                </div>
-                <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-                <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                <p class="item-info" style="font-size: small">{{value.level}}</p>
+    {% if total > 0 %}    
+    <h3>Best 3 items</h3>
+    <div id="best-container" style="display:inline-flex">
+        {% for key, value in top_three_datas %}
+        <div class="item-container" onclick="location.href='/view_detail/{{key}}/';">
+            <div>
+                {% if value.sold == False %}
+                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                {% else %}
+                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px; filter:brightness(50%)">
+                    <div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
+                        Sold Out!
+                    </div>
+                {% endif %}
             </div>
-            {% endfor %}
-                </table>
+            <p class="item-info"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+            <p class="item-info">{{value.okprice}}원</p>
+            <p class="item-info {{'level-' + value.level|lower}}">{{value.level}}</p>
         </div>
-        <br><br>
-    
+        {% endfor %}
+    </div>
+    <br>
+    <div>
+        <hr>
+    </div>
+    <p style="align-self: flex-end;">총 {{total}}개의 상품</p>
+    <br>
     <div id="content-container">    
         <table>
             {% for row in datas|batch(3) %}
@@ -156,7 +164,7 @@
                         </div>
                         <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
                         <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                        <p class="item-info" style="font-size: small">{{value.level}}</p>
+                        <p class="item-info {{'level-' + value.level|lower}}">{{value.level}}</p>
                     </div>
                 </td>
                 {% endfor %}
