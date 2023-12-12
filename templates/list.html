@@ -21,6 +21,8 @@
     }
     
      #best-container {
+        width: 700px;
+        margin-left: 25px;
         display: flex;
         justify-content: space-evenly; /* space-evenly로 간격을 균등하게 배치합니다. */
         align-items: center;
@@ -40,13 +42,15 @@
     }
     
     #best {
+    align-self: center;
     text-align: center;
-    background-color: transparent; /* 배경색을 없앱니다. */
-    color: #1E3269; /* 이전 배경색과 동일한 색상을 지정합니다. */
+    background-color: #1E3269; /* 배경색을 없앱니다. */
+    color: white; /* 이전 배경색과 동일한 색상을 지정합니다. */
     display: inline-block;
     padding: 5px 10px;
     border: 1px solid #1E3269; /* 얇은 테두리를 추가합니다. */
     border-radius: 8px;
+    width: 100px;
     }
     select {
         margin-bottom: 10px;
@@ -94,7 +98,7 @@
     .level-💙매우착해요 {
         background-color: #0000CD;
         color: white;
-        padding: 6px;
+        padding: 5px;
         border-radius: 5px;
     }
 
@@ -102,23 +106,27 @@
     .level-✅합리적이에요 {
         background-color: #006400; 
         color: white;
-        padding: 6px;
+        padding: 5px;
         border-radius: 5px;
     }
 
     .level-💔비싸요 {
-        background-color: red; 
+        background-color: #FF7493; 
         color: white;
-        padding: 6px;
+        padding: 5px;
         border-radius: 5px;
     }
     
     .ranking-table {
-        width: 100%;
+        width: 690px;
+        margin-left: 29px;
         text-align: center;
     }
 
     .ranking-cell {
+        text-decoration: underline;
+        font-family: 'Pretendard';
+        font-size: 14px;
         width: 33.33%; /* 각 셀이 동일한 너비를 차지하도록 설정 */
     }
 </style>
@@ -133,17 +141,17 @@
 <div id="main-container">
     <div id="seller-info">
         <br><br>
-        <h2>제품 피드</h2>
+        <h2>ㅣ 제품 피드 ㅣ</h2>
     </div>
     
     {% if total > 0 %}    
-    <span id="best">Best 3 items</span>
+    <span id="best" width=30%;>Best 3 items</span>
         <div class="best-container" width=100% style="display:inline-flex">
             <table class="ranking-table">
                 <tr>
-                    <td class="ranking-cell"><b>1위</b></td>
-                    <td class="ranking-cell"><b>2위</b></td>
-                    <td class="ranking-cell"><b>3위</b></td>
+                    <td class="ranking-cell"><b>1st</b></td>
+                    <td class="ranking-cell"><b>2nd</b></td>
+                    <td class="ranking-cell"><b>3rd</b></td>
                 </tr>
             </table>
         </div>
@@ -151,17 +159,18 @@
     <div id="best-container" style="display:inline-flex">
         {% for key, value in top_three_datas %}
         <div class="item-container" onclick="location.href='/view_detail/{{key}}/';">
-            <div>
+            <div style="position: relative;">
                 {% if value.sold == False %}
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                    <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px;">
                 {% else %}
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px; filter:brightness(50%)">
+                    <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px; filter:brightness(50%)">
+
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
                         Sold Out!
                     </div>
                 {% endif %}
             </div>
-            <p class="item-info"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+            <div class="item-info" style="margin-top: 10px; margin-bottom: 5px;"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</div>
             <span class="item-info">{{value.okprice}}원</span>
             <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
             
@@ -190,18 +199,18 @@
             <tr>
                 {% for key, value in row %}
                 <td>
-                    <div onclick="location.href='/view_detail/{{key}}/';">
+                    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" onclick="location.href='/view_detail/{{key}}/';">
                         <div style="position: relative;">
                             {% if value.sold == False %}
-                                <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                                <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px;">
                             {% else %}
-                                <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px; filter:brightness(50%)">
-                                <div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
+                                <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px; filter:brightness(50%)">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
                                     Sold Out!
                                 </div>
                             {% endif %}
                         </div>
-                        <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+                        <div class="item-info" style="font-size: small; margin-top: 10px; margin-bottom: 5px;"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</div>
                         <span class="item-info" style="font-size: small">{{value.okprice}}원</span>
                         <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
                     </div>
