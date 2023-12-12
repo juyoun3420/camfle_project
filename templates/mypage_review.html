@@ -73,7 +73,7 @@
 <div id="main-container">
     <div id="seller-info">
         <br><br>
-        <h2>{{name}}님이 판매한 물품 리뷰</h2>
+        <h2>{{name}}🏠 님이 판매한 물품 리뷰</h2>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
                 Market   
@@ -94,9 +94,9 @@
             <td>
                 <div onclick="location.href='/view_review_detail/{{key}}/';">
                     <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
-                    <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
-                    <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
-                    <p class="item-info" style="font-size: small">{{value.level}}</p>
+                    <div class="item-info" style="font-size: 14px; margin-top: 10px; margin-bottom: 5px;"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</div>
+                    <span class="item-info" style="font-size: 14px; font-color:#828282">★&nbsp;{{value.rate}}.0</span>
+                    <span class="item-info" style="font-size: 14px;">{{value.level}}</span>
                 </div>
             </td>
             {% endfor %}

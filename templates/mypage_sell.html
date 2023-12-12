@@ -67,6 +67,28 @@
     #buttons button:hover {
         background-color: #305490; /* 호버 시 배경색 변경 */
     }
+    
+    .level-💙매우착해요 {
+        background-color: #0000CD;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+
+    .level-✅합리적이에요 {
+        background-color: #006400; 
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .level-💔비싸요 {
+        background-color: #FF7493; 
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
 
 </style>
 
@@ -74,7 +96,7 @@
 <div id="main-container">
     <div id="seller-info">
         <br><br>
-        <h2>{{name}}님의 판매 상품 </h2>
+        <h2>{{name}}🏠 님의 판매 상품 </h2>
         <div id="buttons" style="display:flex;">
             <button onclick="location.href='/view_mypage_sell/{{name}}/';" style="cursor:pointer;">
                 Market   
@@ -103,9 +125,9 @@
                                 </div>
                             {% endif %}
                         </div>
-                        <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-                        <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                        <p class="item-info" style="font-size: small">{{value.level}}</p>
+                        <div class="item-info" style="font-size: small; margin-top: 10px; margin-bottom: 5px;"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</div>
+                        <span class="item-info" style="font-size: small">{{value.okprice}}원</span>
+                        <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
                     </div>
             </td>
             {% endfor %}

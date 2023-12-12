@@ -104,9 +104,32 @@
         <textarea style="width: 500px;" class="col-auto form-control" type="text" name="reviewContents" placeholder="리뷰를 남겨주세요." required></textarea>
 
         <p>이미지를 업로드 해주세요:</p>
-        <input type="file" name="file" required><br><br>
+        <input type="file" name="file" onchange="showImagePreview(this)" required><br><br>
+        
+        <img id="image-preview">
 
         <input type="submit" value="리뷰 등록하기" style="margin-left: 230px" class="submitBtn">
     </form>
 </div>
+
+<script>
+    function showImagePreview(input) {
+        var fileInput = input;
+        var preview = document.getElementById('image-preview');
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // 이미지 미리보기 표시
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none'; // 파일이 선택되지 않으면 이미지 미리보기 숨김
+        }
+    }
+</script>
 {% endblock %}

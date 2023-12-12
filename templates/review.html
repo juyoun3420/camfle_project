@@ -84,11 +84,11 @@
 <div id="main-container">
     <div id="seller-info">
         <br><br>
-        <h2>리뷰 피드</h2>
+        <h2>ㅣ 리뷰 피드 ㅣ</h2>
     </div>
     <hr>
     {% if total > 0 %}
-    <p style="align-self: flex-end;">총 {{total}}개의 상품</p>
+    <p style="align-self: flex-end;">총 {{total}}개의 리뷰</p>
     <div id="content-container">
         <table>
         {% for row in datas|batch(3) %}
@@ -98,9 +98,9 @@
                 <!--한 아이템 감싸는 div에다가 마진 오/왼 주고 아이템 이미지는 210x210-->
                 <div style="margin-left: 20px; margin-right: 20px;" onclick="location.href='/view_review_detail/{{key}}/';">
                     <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px;">
-                    <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
-                    <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
-                    <p class="item-info" style="font-size: small">{{value.level}}</p>
+                    <div class="item-info" style="font-size: 14px; margin-top: 10px; margin-bottom: 5px;"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</div>
+                    <span class="item-info" style="font-size: 14px; font-color:#828282">★&nbsp;{{value.rate}}.0</span>
+                    <span class="item-info" style="font-size: 14px">{{value.level}}</span>
                 </div>
             </td>
             {% endfor %}
