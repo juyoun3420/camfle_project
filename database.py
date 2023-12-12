@@ -77,7 +77,7 @@ class DBhandler:
         items = self.get_items()
 
         # sold가 False인 아이템만 필터링
-        sold_false_items = {key: value for key, value in items.items() if value.get('sold', False)}
+        sold_false_items = {key: value for key, value in items.items() if not value.get('sold', False)}
 
         # 클릭 수 기준으로 정렬
         sorted_items = sorted(sold_false_items.items(), key=lambda x: x[1].get('click_count', 0), reverse=True)
