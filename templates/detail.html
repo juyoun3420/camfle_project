@@ -217,7 +217,14 @@
 </script>
 
 <div id="main-container">
-    <img src="../../static/images/{{data.img_path}}", width=400, height=400>
+    {% if data.sold == False %}
+        <img src="/static/images/{{data.img_path}}" width=400 height=400 style="border-radius: 8px;">
+    {% else %}
+        <img src="/static/images/{{data.img_path}}" width=400 height=400 style="border-radius: 8px; filter:brightness(50%)">
+        <div style="position: absolute; top: 50%; left: 38%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: x-large;">
+                Sold Out!
+        </div>
+    {% endif %}
     <div id="content-container">
         <p>
             카테고리 > {{data.category}}
