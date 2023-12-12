@@ -195,7 +195,6 @@ class DBhandler:
 
         return new_dict
         
-    
     def update_sold(self, uid, name, data):
         items = self.db.child("item").get()
         print("###########", name)
@@ -222,7 +221,11 @@ class DBhandler:
     
     def get_reviews(self ):
         reviews = self.db.child("review").get().val()
-        return reviews
+        
+        if reviews is not None:
+            return reviews
+        else :
+            return {}
     
     def get_review_byname(self, name):
         reviews = self.db.child("review").get()
@@ -247,9 +250,11 @@ class DBhandler:
                 target_value=res.val()
         return target_value
     
+    
     def update_heart(self, user_id, isHeart, item):
-                heart_info ={
-                    "interested": isHeart
-                }
-                self.db.child("heart").child(user_id).child(item).set(heart_info)
-                return True
+        heart_info ={
+            "interested": isHeart
+        }
+        self.db.child("heart").child(user_id).child(item).set(heart_info)
+        return True
+    
