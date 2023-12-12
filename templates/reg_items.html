@@ -93,6 +93,20 @@
         margin: 0 auto; /* 가운데 정렬을 위해 추가한 부분 */
         display: block; /* 가운데 정렬을 위해 추가한 부분 */
     }
+    
+    .decideBtn{
+        width: 200px;
+        height: 25px;
+        background: #e6e6e6;
+        font-size: 14px;
+        border-radius: 8px;
+        border-style: none;
+        font-family: "Pretendard";
+        margin-bottom: 20px;
+    }
+    .decideBtn:hover {
+        background: #d9d9d9;
+    }
 
     .submitBtn:hover {
         background: #305490;
@@ -141,7 +155,7 @@
 
         <div class="checkbox-label" id="recommand-container">
             <div id="recommand"></div>
-            <label for="sellWithRecommand">추천 판매가로 판매하기</label>
+            <label for="sellWithRecommand" style="margin-bottom: 0; font-weight:600;">추천 판매가로 판매하기</label>
             <input type="checkbox" id="sellWithRecommand">
         </div>
 
@@ -149,8 +163,7 @@
         <input type="text" name="okprice" id="okprice">
         <input type="hidden" name="okprice" id="okprice-hidden" value="">
         <input type="hidden" name="level" id="level">
-        <input type="button" onclick="calculateLevel()" value="가격 결정하기">
-        
+        <input type="button" onclick="calculateLevel()" value="최종 판매가로 결정하기" class="decideBtn">
         <label for="img">이미지를 업로드 해주세요:</label>
         <input type="file" name="file" onchange="showImagePreview(this)">
         <img id="image-preview">
@@ -219,11 +232,11 @@
 
         
         if(okPrice<recPrice){
-            levelInput.value = "매우착해요";
+            levelInput.value = "💙매우착해요";
         } else if(okPrice == recPrice){
-            levelInput.value = "합리적이에요";
+            levelInput.value = "✅합리적이에요";
         } else {
-            levelInput.value = "비싸요";
+            levelInput.value = "💔비싸요";
         }
     }
     
@@ -245,10 +258,23 @@
             preview.style.display = 'none'; // 파일이 선택되지 않으면 이미지 미리보기 숨김
         }
     }
+    
 
     priceInput.addEventListener("input", calculateRecommandPrice);
     statusSelect.addEventListener("change", calculateRecommandPrice);
     timeSelect.addEventListener("change", calculateRecommandPrice);
     sellWithRecommandCheckbox.addEventListener("change", toggleRecommandPrice);
+    
+    var decideBtn = document.querySelector(".decideBtn");
+
+    decideBtn.addEventListener("click", function () {
+        // 배경색을 어두운 회색(#444444)으로 변경
+        decideBtn.style.backgroundColor = "#444444";
+        // 텍스트 색상을 흰색으로 변경
+        decideBtn.style.color = "white";
+        
+        decideBtn.classList.add("emoji-show");
+    });
+    
 </script>
 {% endblock section %}

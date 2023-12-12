@@ -90,17 +90,27 @@
     .page-nation a:hover {
         background-color: #f2f2f2; /* 호버 시 배경색 변경 */
     }
-    .level-매우착해요 {
-        color: blue; /* 매우 착해요 레벨의 글자색을 초록색으로 지정합니다. */
+    
+    .level-💙매우착해요 {
+        background-color: #0000CD;
+        color: white;
+        padding: 6px;
+        border-radius: 5px;
     }
 
 
-    .level-합리적이에요 {
-        color: green; /* 합리적이에요 레벨의 글자색을 주황색으로 지정합니다. */
+    .level-✅합리적이에요 {
+        background-color: #006400; 
+        color: white;
+        padding: 6px;
+        border-radius: 5px;
     }
 
-    .level-비싸요 {
-        color: red; /* 비싸요 레벨의 글자색을 빨간색으로 지정합니다. */
+    .level-💔비싸요 {
+        background-color: red; 
+        color: white;
+        padding: 6px;
+        border-radius: 5px;
     }
     
     .ranking-table {
@@ -152,8 +162,9 @@
                 {% endif %}
             </div>
             <p class="item-info"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-            <p class="item-info">{{value.okprice}}원</p>
-            <p class="item-info {{'level-' + value.level|lower}}">{{value.level}}</p>
+            <span class="item-info">{{value.okprice}}원</span>
+            <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
+            
         </div>
         {% endfor %}
     </div>
@@ -191,8 +202,8 @@
                             {% endif %}
                         </div>
                         <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-                        <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                        <p class="item-info {{'level-' + value.level|lower}}">{{value.level}}</p>
+                        <span class="item-info" style="font-size: small">{{value.okprice}}원</span>
+                        <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
                     </div>
                 </td>
                 {% endfor %}
