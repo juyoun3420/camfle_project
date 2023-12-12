@@ -43,14 +43,34 @@
         width: 100%;
         border-collapse: collapse;
     }
+    
+    .level-💙매우착해요 {
+        background-color: #0000CD;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    .level-✅합리적이에요 {
+        background-color: #006400; 
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
 
+    .level-💔비싸요 {
+        background-color: #FF7493; 
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
 
 </style>
 
 <div id="main-container">
     <div id="seller-info">
         <br><br>
-        <h2>{{session['id']}}님이 좋아요한 상품</h2>
+        <h2>{{session['id']}}님이 좋아요❤️ 상품</h2>
     </div>
     <hr>
     {% if total > 0 %}
@@ -61,11 +81,11 @@
                 <tr>
                     {% for key, value in row %}
                     <td>
-                        <div onclick="location.href='/view_detail/{{key}}/';">
-                            <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
-                            <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-                            <p class="item-info" style="font-size: small">{{value.okprice}}</p>
-                            <p class="item-info" style="font-size: small">{{value.level}}</p>
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" onclick="location.href='/view_detail/{{key}}/';">
+                            <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px;">
+                            <div class="item-info" style="font-size: small; margin-top: 10px; margin-bottom: 5px;"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</div>
+                            <span class="item-info" style="font-size: small">{{value.okprice}}원</span>
+                            <span class="item-info {{'level-' + value.level|lower}}" style="font-size: 12px;">{{value.level}}</span>
                         </div>
                     </td>
                     {% endfor %}
