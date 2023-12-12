@@ -116,6 +116,7 @@
         <h3>Best 3 items</h3>
         <div id="best-container">
             <table>
+                <tr>
             {% for key, value in top_three_datas %}
             <div onclick="location.href='/view_detail/{{key}}/';">
                 <div style="position: relative;">
@@ -130,9 +131,10 @@
                 </div>
                 <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
                 <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                <p class="item-info" style="font-size: small">{{value.level}}</p>
+                <p class="item-info" style="font-size: small">{{value.level}}</p>                
             </div>
             {% endfor %}
+                </tr>
                 </table>
         </div>
         <br><br>
