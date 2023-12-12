@@ -225,9 +225,10 @@ def view_mypage_review(name):
 @application.route("/view_review_detail/<name>/")
 def view_review_detail(name):
     print("###name:", name)
+    item = DB.get_item_byname(str(name))
     data = DB.get_review_byname(str(name))
     print("###data:", data)
-    return render_template("review_detail.html", name=name, data=data)
+    return render_template("review_detail.html", name=name, data=data, item=item)
 
 @application.route("/view_mypage_like/<name>/")
 def view_mypage_like(name):

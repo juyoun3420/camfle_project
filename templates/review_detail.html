@@ -1,6 +1,77 @@
  {% extends "index.html" %}
  {% block section %}
 <style>
+    @font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.ttf') format("truetype");
+    font-display: swap;
+}
+
+    *{
+        font-family: 'Pretendard';
+    }
+
     .wrapper {
         display: flex;
         flex-direction:column;
@@ -29,95 +100,53 @@
     }
     
     #content-container{
-        width: 250px;
-        margin: auto;
-        margin-top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items:flex-start;
-        justify-content: space-around;
+        flex: 1; /* Take remaining space */
+        padding-left: 20px; /* Add some space between image and content */
     }
+    
+     
+    img {
+        max-width: 100%; /* Make sure the image is responsive */
+        height: auto;
+    }
+
 
 </style>
-
-<script>
-    function showHeart() {
-        $.ajax({
-            type: 'GET',
-            url: '/show_heart/{{name}}/',
-            data: {},
-            success: function (response)
-            {
-                let my_heart = response['my_heart'];
-                if (my_heart['interested'] == 'Y')
-                {
-                    $("#heart").css("color","red");
-                    $("#heart").attr("onclick","unlike()");
-                }
-                else{
-                    $("#heart").css("color","grey");
-                    $("#heart").attr("onclick","like()");
-                }
-                //alert("showheart!")
-            }
-        }); 
-    }
-    function like() {
-        $.ajax({
-            type: 'POST',
-            url: '/like/{{name}}/',
-            data: {
-                interested : "Y"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-    function unlike() {
-        $.ajax({
-            type: 'POST',
-            url: '/unlike/{{name}}/',
-            data: {
-                interested : "N"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-    $(document).ready(function () {
-        showHeart();
-    });
-</script>
-<div class="wrapper">
-    
-<br><br>
-<h2>ㅣ 리뷰 상세 ㅣ</h2>
+<div class="wrapper">    
+    <br><br>
+    <h2>ㅣ 리뷰 상세 ㅣ</h2>
     <br>
+    
 <div id="main-container">
     
     <img src="../../static/images/{{data.img_path}}", width=300, height=300>
     
     <div id="content-container">
-        <h3>
-            ㅣ 리뷰 제목
-        </h3>
-        <span>{{data.title}}</span>
-         <h3>
-            ㅣ 제품 평점
-        </h3>
-        <span>{{data.rate}}/5</span>
-         <h3>
-            ㅣ 제품 리뷰
-        </h3>
-        <span>{{data.review}}</span>
-        <br>
-        
+        <p>
+            카테고리 > {{item.category}}
+        </p>
+        <div>
+            판매자: <span onclick="location.href='/view_mypage_sell/{{item.seller}}/';" style="cursor:pointer;">{{item.seller}}&nbsp;🏠</span>
+        </div>
+        <p>
+            상품명: {{name}}
+        </p>
+        <div>
+            <hr>
+        </div>
+        <p>
+            리뷰제목: <b>{{data.title}}</b>
+        </p>
+        <p>
+            작성자: {{data.writer}}
+        </p>
+        <p>
+            평점: {{data.rate}}/5
+        </p>
+        <p>
+            상세리뷰: {{data.review}}
+        </p>
      </div>
-    
 </div>
     <br>
 </div>
