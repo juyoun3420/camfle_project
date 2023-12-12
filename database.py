@@ -21,7 +21,8 @@ class DBhandler:
             "level": data['level'],
             "sold": False,
             "buyer": "",
-            "img_path": img_path
+            "img_path": img_path,
+            "click_count": 0
         }
         self.db.child("item").child(name).set(item_info)
         print(data,img_path)
@@ -71,6 +72,23 @@ class DBhandler:
             return items
         else :
             return {}
+    
+    def get_top_three_items(self):
+        items=self.get_items()
+        sorted_items = sorted(items.items(), key=lambda x:x[1].get('click_count', 0), reverse=True)
+        top_three_items = dict(sorted_items[:3])
+        
+        return top_three_items
+    
+    def add_click(self, name):
+        item = self.get_item_byname(name)
+        click_count = item.get('click_count', 0)
+        click_count += 1
+
+        item_ref = self.db.child("item").child(name)
+        item_ref.update({"click_count": click_count})
+
+        return True
     
     def get_items_bycategory(self,cate):
         items=self.db.child("item").get()

@@ -92,12 +92,21 @@
         <tr>
             {% for key, value in row %}
             <td>
-                 <div onclick="location.href='/view_detail/{{key}}/';">
-                            <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
-                            <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
-                            <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
-                            <p class="item-info" style="font-size: small">{{value.level}}</p>
+                    <div onclick="location.href='/view_detail/{{key}}/';">
+                        <div style="position: relative;">
+                            {% if value.sold == False %}
+                                <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                            {% else %}
+                                <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px; filter:brightness(50%)">
+                                <div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: medium;">
+                                    Sold Out!
+                                </div>
+                            {% endif %}
                         </div>
+                        <p class="item-info" style="font-size: small"><b>{{value.category}}</b>&nbsp;|&nbsp;{{key}}</p>
+                        <p class="item-info" style="font-size: small">{{value.okprice}}원</p>
+                        <p class="item-info" style="font-size: small">{{value.level}}</p>
+                    </div>
             </td>
             {% endfor %}
         </tr>

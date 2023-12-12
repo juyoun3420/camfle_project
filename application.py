@@ -85,9 +85,12 @@ def view_list():
         else:
             locals()['data_{}'.format(i)] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
 
+    top_three_items = DB.get_top_three_items()
+    
     return render_template(
         "list.html",
         datas=data.items(),
+        top_three_datas= top_three_items.items(),
         row1=locals()['data_0'].items(),
         row2=locals()['data_1'].items(),
         limit=per_page,
@@ -270,6 +273,7 @@ def DynamicUrl(varible_name):
 def view_item_detail(name):
     print("###name:",name)
     data = DB.get_item_byname(str(name))
+    DB.add_click(name)
     print("####data:",data)
     return render_template("detail.html", name=name, data=data)
     
