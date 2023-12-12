@@ -95,8 +95,9 @@
         <tr>
             {% for key, value in row %}
             <td>
-                <div onclick="location.href='/view_review_detail/{{key}}/';">
-                    <img src="/static/images/{{value.img_path}}" width=200 height=200 style="border-radius: 8px;">
+                <!--한 아이템 감싸는 div에다가 마진 오/왼 주고 아이템 이미지는 210x210-->
+                <div style="margin-left: 20px; margin-right: 20px;" onclick="location.href='/view_review_detail/{{key}}/';">
+                    <img src="/static/images/{{value.img_path}}" width=210 height=210 style="border-radius: 8px;">
                     <p class="item-info" style="font-size: small"><b>{{key}}</b>&nbsp;|&nbsp;{{value.title}}</p>
                     <p class="item-info" style="font-size: small; font-color:#828282">★&nbsp;{{value.rate}}.0</p>
                     <p class="item-info" style="font-size: small">{{value.level}}</p>
