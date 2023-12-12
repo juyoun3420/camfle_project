@@ -194,7 +194,7 @@ class DBhandler:
             new_dict[k] = v
 
         return new_dict
-        
+            
     def update_sold(self, uid, name, data):
         items = self.db.child("item").get()
         print("###########", name)

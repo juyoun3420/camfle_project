@@ -93,6 +93,15 @@
     .level-비싸요 {
         color: red; /* 비싸요 레벨의 글자색을 빨간색으로 지정합니다. */
     }
+    
+    .ranking-table {
+        width: 100%;
+        text-align: center;
+    }
+
+    .ranking-cell {
+        width: 33.33%; /* 각 셀이 동일한 너비를 차지하도록 설정 */
+    }
 </style>
 
 <script>
@@ -107,19 +116,19 @@
         <br><br>
         <h2>제품 피드</h2>
     </div>
-    <hr>
-    <select style="width: 100px; height: 25px;" id="category" name="category" onchange="location=this.value">
-        <option value="{{url_for('view_list', page=i, category='all')}}">All</option>
-        <option value="{{url_for('view_list', page=i, category='의류')}}"> 의류 </option>
-        <option value="{{url_for('view_list', page=i, category='뷰티')}}"> 뷰티 </option>
-        <option value="{{url_for('view_list', page=i, category='도서')}}"> 도서 </option>
-        <option value="{{url_for('view_list', page=i, category='가구')}}"> 가구 </option>
-        <option value="{{url_for('view_list', page=i, category='물품')}}"> 물품 </option>
-        <option value="{{url_for('view_list', page=i, category='기타')}}"> 기타 </option>
-    </select>
-
+    
     {% if total > 0 %}    
     <h3>Best 3 items</h3>
+        <div class="best-container" width=100% style="display:inline-flex">
+            <table class="ranking-table">
+                <tr>
+                    <td class="ranking-cell"><b>1위</b></td>
+                    <td class="ranking-cell"><b>2위</b></td>
+                    <td class="ranking-cell"><b>3위</b></td>
+                </tr>
+            </table>
+        </div>
+    <br>
     <div id="best-container" style="display:inline-flex">
         {% for key, value in top_three_datas %}
         <div class="item-container" onclick="location.href='/view_detail/{{key}}/';">
@@ -143,8 +152,18 @@
     <div>
         <hr>
     </div>
+    
     <p style="align-self: flex-end;">총 {{total}}개의 상품</p>
-    <br>
+    <select style="width: 100px; height: 25px;" id="category" name="category" onchange="location=this.value">
+        <option value="{{url_for('view_list', page=i, category='all')}}">All</option>
+        <option value="{{url_for('view_list', page=i, category='의류')}}"> 의류 </option>
+        <option value="{{url_for('view_list', page=i, category='뷰티')}}"> 뷰티 </option>
+        <option value="{{url_for('view_list', page=i, category='도서')}}"> 도서 </option>
+        <option value="{{url_for('view_list', page=i, category='가구')}}"> 가구 </option>
+        <option value="{{url_for('view_list', page=i, category='물품')}}"> 물품 </option>
+        <option value="{{url_for('view_list', page=i, category='기타')}}"> 기타 </option>
+    </select>
+    
     <div id="content-container">    
         <table>
             {% for row in datas|batch(3) %}
