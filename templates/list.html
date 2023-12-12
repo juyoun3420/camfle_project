@@ -38,7 +38,16 @@
         color: #1E3269;
         margin-bottom: 20px;
     }
-
+    
+    #best {
+    text-align: center;
+    background-color: transparent; /* 배경색을 없앱니다. */
+    color: #1E3269; /* 이전 배경색과 동일한 색상을 지정합니다. */
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #1E3269; /* 얇은 테두리를 추가합니다. */
+    border-radius: 8px;
+    }
     select {
         margin-bottom: 10px;
     }
@@ -118,7 +127,7 @@
     </div>
     
     {% if total > 0 %}    
-    <h3>Best 3 items</h3>
+    <span id="best">Best 3 items</span>
         <div class="best-container" width=100% style="display:inline-flex">
             <table class="ranking-table">
                 <tr>
