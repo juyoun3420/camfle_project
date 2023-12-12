@@ -72,13 +72,20 @@ class DBhandler:
             return items
         else :
             return {}
-    
+
     def get_top_three_items(self):
-        items=self.get_items()
-        sorted_items = sorted(items.items(), key=lambda x:x[1].get('click_count', 0), reverse=True)
+        items = self.get_items()
+
+        # sold가 False인 아이템만 필터링
+        sold_false_items = {key: value for key, value in items.items() if value.get('sold', False)}
+
+        # 클릭 수 기준으로 정렬
+        sorted_items = sorted(sold_false_items.items(), key=lambda x: x[1].get('click_count', 0), reverse=True)
+
+        # 상위 세 개의 아이템 반환
         top_three_items = dict(sorted_items[:3])
-        
-        return top_three_items
+
+        return top_three_items    
     
     def add_click(self, name):
         item = self.get_item_byname(name)
