@@ -2,6 +2,9 @@
 [ CAMFLE Introducing ]
 
 접속 url : https://givoandtake.run.goorm.io/list
+* 접속 계정은
+  ID : hyemin / PW : hyemin 사용 *
+
 
 * 파일 구조<br>
 camfle_project/<br>
