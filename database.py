@@ -28,6 +28,7 @@ class DBhandler:
         print(data,img_path)
         return True
     
+
     def insert_user(self, data, pw):
         user_info ={
             "id": data['id'],

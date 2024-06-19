@@ -230,6 +230,11 @@ def view_review_detail(name):
     print("###data:", data)
     return render_template("review_detail.html", name=name, data=data, item=item)
 
+@application.route("/timetable_match/<name>/")
+def view_timetable_match(name):
+    print("###name:", name)
+    return render_template("timetable_match.html", name=name)
+
 @application.route("/view_mypage_like/<name>/")
 def view_mypage_like(name):
     data = DB.get_item_bylike(str(name))

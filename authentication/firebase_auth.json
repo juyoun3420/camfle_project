@@ -1,9 +1,10 @@
 {
-  "apiKey": "AIzaSyD-3nSf4dxT_k0Zf5PWxiv8qQDHHGAK9lo",
+  "apiKey" : "AIzaSyD-3nSf4dxT_k0Zf5PWxiv8qQDHHGAK9lo",
   "authDomain": "ewha-market-857cc.firebaseapp.com",
   "databaseURL": "https://ewha-market-857cc-default-rtdb.firebaseio.com",
   "projectId": "ewha-market-857cc",
   "storageBucket": "ewha-market-857cc.appspot.com",
   "messagingSenderId": "29517407788",
-  "appId": "1:29517407788:web:6a739eb54c4455aeb75389"
+  "appId": "1:29517407788:web:6a739eb54c4455aeb75389",
+  "measurementId": "G-G939G3FGK9"
 }

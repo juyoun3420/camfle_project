@@ -1,0 +1,157 @@
+{% extends "index.html" %}
+{% block section %}
+<style>
+    body {
+        font-family: 'Pretendard', sans-serif;
+    }
+    #main-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 750px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border: 1px solid #efefef;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a slight shadow */
+    }
+
+    #content-container{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #seller-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: x-large;
+        text-align: center;
+        color: #006400;
+        margin-bottom: 20px;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+        
+        /* 버튼 스타일 */
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        justify-content: center; 
+        gap: 10px; /* 버튼 간 간격 */
+    }
+
+    .btn-container button {
+        background-color: #006400;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-container button:hover {
+        background-color: #004d00;
+    }
+    
+    .center-text {
+    text-align: center;
+    margin: 0 auto;
+    }
+    
+    .small-container {
+        background-color: white;
+        border: 1px solid #efefef;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+        .responsive-img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+
+</style>
+
+<div id="main-container">
+    <div id="seller-info">
+        <br><br>
+        <h2>{{session['id']}}님의 시간표 매칭</h2>
+    </div>
+    <hr>
+        <p class="center-text">매칭할 친구를 선택해 주세요</p>
+        <br><br>
+        <div class="btn-container">
+            <button id="btn-juyoun">주연님과 매칭</button>
+            <button id="btn-haein">해인님과 매칭</button>
+            <button id="btn-seungmin">승민님과 매칭</button>
+        </div>
+    <div id="content-container">
+        <br><br>
+        <p class="center-text">선택된 친구가 없습니다!</p>
+        
+    </div>
+</div>
+
+<script>
+    document.getElementById('btn-juyoun').addEventListener('click', function() {
+        loadContent('juyoun');
+    });
+
+    document.getElementById('btn-haein').addEventListener('click', function() {
+        loadContent('haein');
+    });
+
+    document.getElementById('btn-seungmin').addEventListener('click', function() {
+        loadContent('seungmin');
+    });
+
+    function loadContent(friend) {
+        var contentContainer = document.getElementById('content-container');
+
+        if (friend === 'juyoun') {
+                       contentContainer.innerHTML = `
+                <img src="/static/images/img_charge/hyemin.png" class="responsive-img"><br>
+                <div class="small-container"><p>추천 1 : 월 12:30~2:00</p></div><br>
+                <div class="small-container"><p>추천 2 : 목 12:30~2:00</p></div><br>
+                <div class="small-container"><p>추천 3 : 화 3:30~5:00</p></div>
+            `;
+        } else if (friend === 'haein') {
+            contentContainer.innerHTML = `
+                <img src="/static/images/img_charge/haein.png" class="responsive-img"><br>
+                <div class="small-container"><p>추천 1 : 수 12:30~2:00</p></div><br>
+                <div class="small-container"><p>추천 2 : 화 12:30~2:00</p></div><br>
+                <div class="small-container"><p>추천 3 : 월 11:00~12:30</p></div>
+            `;
+        } else if (friend === 'seungmin') {
+            contentContainer.innerHTML = `
+                <img src="/static/images/img_charge/seungmin.png" class="responsive-img"><br>
+                <div class="small-container"><p>추천 1 : 화 3:30~5:00</p></div><br>
+                <div class="small-container"><p>추천 2 : 금 9:30~11:00</p></div><br>
+                <div class="small-container"><p>추천 3 : 금 3:30~5:00</p></div>
+            `;
+        }
+    }
+</script>
+
+{% endblock %}

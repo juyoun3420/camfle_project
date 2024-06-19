@@ -11,14 +11,14 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>    
     <style>
         body {
-            background-color: #FFEFD5;
+            background-color: white;
             margin: 0;
             padding: 0;
             font-family: 'Pretendard', sans-serif;
         }
 
         .navbar  {
-            background-color: #FFEFD5; /* 수정된 부분: 투명이 아닌 배경 색상으로 변경 */
+            background-color: white; /* 수정된 부분: 투명이 아닌 배경 색상으로 변경 */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -27,7 +27,7 @@
 
         .navbar__logo a {
             font-size: 2.0rem;
-            color: #1E3269;
+            color: #006400;
             text-decoration: none;
         }
 
@@ -43,7 +43,7 @@
 
         .navbar__menu a {
             text-decoration: none;
-            color: #1E3269;
+            color: #006400;
         }
 
         .navbar__menu a:hover {
@@ -61,7 +61,7 @@
             <li><a href="/review">리뷰 피드</a></li>
             <li><a href="/reg_items">제품 등록</a></li>
             {% if session['id'] %}
-                <li><a href="/view_mypage_like/{{session['id']}}"><b>{{session['id']}}님 반갑습니다!</b></a></li>
+                <li><a href="/timetable_match/{{session['id']}}"><b>{{session['id']}}님 반갑습니다!</b></a></li>
                 <li><a href="/logout">Logout</a></li>
             {% else %}
                 <li><a href="/login">Login</a></li>
