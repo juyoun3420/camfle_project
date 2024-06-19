@@ -37,3 +37,7 @@ camfle_project/<br>
     ├── submit_item_result.html<br>
     ├── timetable_match.html<br>
     └── ...<br>
+
+* 주요 코드 설명
+   1. 물품 적정 가격 추천
+   2. 시간표 매칭 서비스
